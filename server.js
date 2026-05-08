@@ -19,8 +19,17 @@ let teamScores = {};
 
 // LOAD SAVED SCORES
 const scoresFile = "scores.json";
+
 if (fs.existsSync(scoresFile)) {
-  teamScores = JSON.parse(fs.readFileSync(scoresFile));
+  try {
+    const raw = fs.readFileSync(scoresFile, "utf8");
+    teamScores = raw ? JSON.parse(raw) : {};
+  } catch (err) {
+    console.log("scores.json corrupted or empty, resetting...");
+    teamScores = {};
+  }
+} else {
+  teamScores = {};
 }
 
 let countdownEnd = null;
