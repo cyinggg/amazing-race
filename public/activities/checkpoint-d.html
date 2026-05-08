@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check Point D</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    .hidden {
+      display:none;
+    }
+
+    .numberBox {
+      width:60px;
+      padding:10px;
+      margin:5px;
+      text-align:center;
+      font-size:18px;
+    }
+
+    .correct {
+      background:lightgreen;
+    }
+
+    .wrong {
+      background:#ffb3b3;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="teamInfo"></div>
+
+<h1>Check Point D</h1>
+
+<h2>Choose ONE Activity</h2>
+
+<button id="chooseFast">
+  Fast Hand Game Machine
+</button>
+
+<button id="chooseMemory">
+  Memory Game
+</button>
+
+<hr>
+
+<!-- FAST HAND -->
+<div id="fastSection" class="hidden">
+
+  <h2>Fast Hand Game Machine</h2>
+
+  <p>
+    Enter Number of Catch
+  </p>
+
+  <input
+    type="number"
+    id="catchInput"
+  >
+
+  <p>
+    Enter Password
+  </p>
+
+  <input
+    type="password"
+    id="fastPassword"
+  >
+
+  <br><br>
+
+  <button id="submitFast">
+    Submit
+  </button>
+
+</div>
+
+<!-- MEMORY GAME -->
+<div id="memorySection" class="hidden">
+
+  <h2>Memory Game</h2>
+
+  <h3 id="memoryTimer"> 01:00 </h3>
+
+  <h4 id="memoryInstruction">
+    Memorise the numbers shown in sequence carefully. You will be tested after the display ends.
+  </h4>
+
+  <button id="startMemoryBtn">
+    Start Memory Game
+  </button>
+
+  <p id="gameStatus"></p>
+
+  <div id="memoryDisplay"></div>
+
+  <div id="memoryInputs"></div>
+
+  <button
+    id="submitMemory"
+    class="hidden"
+  >
+    Submit Answers
+  </button>
+
+</div>
+
+<br><br>
+
+<a href="clue-e.html">
+  <button>
+    Proceed to Clue to Check Point E
+  </button>
+</a>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/team.js"></script>
+<script src="../js/scoring.js"></script>
+
+<script>
+
+async function addDirectScore(points) {
+
+  const group =
+  localStorage.getItem("group");
+
+  await fetch("/add-score", {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+      group,
+      points: Number(points)
+    })
+  });
+
+  loadTeam();
+
+  alert("Score Added");
+}
+
+loadTeam();
+
+let activityChosen = false;
+
+const PASSWORD = "SIT2009";
+
+// =========================
+// CHOOSE FAST HAND
+// =========================
+
+document.getElementById("chooseFast")
+.onclick = () => {
+
+  if (activityChosen) return;
+
+  activityChosen = true;
+
+  document.getElementById("chooseMemory")
+  .disabled = true;
+
+  document.getElementById("fastSection")
+  .classList.remove("hidden");
+};
+
+
+// =========================
+// CHOOSE MEMORY
+// =========================
+
+document.getElementById("chooseMemory").onclick = () => {
+
+  if (activityChosen) return;
+
+  activityChosen = true;
+
+  document.getElementById("chooseFast")
+  .disabled = true;
+
+  document.getElementById("memorySection")
+  .classList.remove("hidden");
+};
+
+document.getElementById("startMemoryBtn").onclick = () => {
+  startMemoryGame();
+};
+
+// =========================
+// FAST HAND SUBMIT
+// =========================
+
+document.getElementById("submitFast")
+.onclick = async () => {
+
+  const catchCount =
+  parseInt(
+    document.getElementById("catchInput").value
+  );
+
+  const password =
+  document.getElementById("fastPassword").value;
+
+  if (password !== PASSWORD) {
+    alert("Wrong Password");
+    return;
+  }
+
+  if (isNaN(catchCount)) {
+    alert("Enter valid number");
+    return;
+  }
+
+  await addDirectScore(Number(catchCount));
+
+  loadTeam();
+
+  alert("Score Added");
+
+  document.getElementById("submitFast")
+  .disabled = true;
+};
+
+
+// =========================
+// MEMORY GAME
+// =========================
+
+let memoryNumbers = [];
+
+async function startMemoryGame() {
+
+  const display = document.getElementById("memoryDisplay");
+  const timerEl = document.getElementById("memoryTimer");
+
+  // RESET numbers each game
+  memoryNumbers = [];
+
+  for (let i = 0; i < 60; i++) {
+    memoryNumbers.push(Math.floor(Math.random() * 90) + 10);
+  }
+
+  // helper to show text briefly
+  const showTemp = async (text) => {
+    display.innerText = text;
+    await wait(1000);
+  };
+
+  // =========================
+  // GET READY COUNTDOWN
+  // =========================
+  await showTemp("GET READY");
+  await showTemp("3");
+  await showTemp("2");
+  await showTemp("1");
+  await showTemp("START");
+
+  // =========================
+  // START TIMER + FLASH NUMBERS TOGETHER
+  // =========================
+  let timeLeft = 60;
+  let index = 0;
+
+  const timerInterval = setInterval(() => {
+
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
+
+    timerEl.innerText =
+      `${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+
+    timeLeft--;
+
+    if (timeLeft < 0) {
+      clearInterval(timerInterval);
+    }
+  }, 1000);
+
+  const flashInterval = setInterval(() => {
+
+    if (index >= memoryNumbers.length) {
+      clearInterval(flashInterval);
+      display.innerText = "";
+      showInputBoxes();
+      return;
+    }
+
+    display.innerText = memoryNumbers[index];
+    index++;
+
+  }, 1000);
+}
+
+// =========================
+// SHOW INPUT BOXES
+// =========================
+
+async function showInputBoxes() {
+
+  const status =
+  document.getElementById("gameStatus");
+
+  status.innerText = "Input Answers";
+
+  let answerSeconds = 60;
+
+  const timer =
+  document.getElementById("memoryTimer");
+
+  const inputDiv =
+  document.getElementById("memoryInputs");
+
+  inputDiv.innerHTML = "";
+
+  for (let i = 0; i < 60; i++) {
+
+    inputDiv.innerHTML += `
+      <input
+        class="numberBox"
+        id="box${i}"
+      >
+    `;
+  }
+
+  document.getElementById("submitMemory")
+  .classList.remove("hidden");
+
+  const answerTimer = setInterval(() => {
+
+    const mins =
+    Math.floor(answerSeconds / 60);
+
+    const secs =
+    answerSeconds % 60;
+
+    timer.innerText =
+    `${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+
+    answerSeconds--;
+
+    if (answerSeconds < 0) {
+
+      clearInterval(answerTimer);
+
+      submitMemoryAnswers();
+    }
+
+  }, 1000);
+}
+
+// =========================
+// SUBMIT MEMORY
+// =========================
+
+document.getElementById("submitMemory")
+.onclick = () => {
+  submitMemoryAnswers();
+};
+
+async function submitMemoryAnswers() {
+
+  let score = 0;
+
+  for (let i = 0; i < 60; i++) {
+
+    const input =
+    document.getElementById(`box${i}`);
+
+    const value =
+    input.value.trim();
+
+    if (value == memoryNumbers[i]) {
+
+      input.classList.add("correct");
+
+      score++;
+
+    } else {
+
+      input.classList.add("wrong");
+    }
+
+    input.disabled = true;
+  }
+
+  await updateScore(score);
+
+  loadTeam();
+
+  document.getElementById("submitMemory")
+  .disabled = true;
+
+  alert(
+    `You scored ${score} points`
+  );
+}
+
+
+// =========================
+// WAIT
+// =========================
+
+function wait(ms) {
+
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
+</script>
+
+</body>
+</html>

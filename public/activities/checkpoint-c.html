@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check Point C</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+</head>
+
+<body>
+
+<div id="teamInfo"></div>
+
+<h1>Check Point C</h1>
+
+<h2>Hula Hoop Pass</h2>
+
+<p>
+  Please pass your device to teacher in-charge.
+  Teacher in-charge to start the timer when team ready and end when completed.
+</p>
+
+<button id="startBtn">
+  Start
+</button>
+
+<button id="restartBtn">
+  Restart
+</button>
+
+<button id="finishBtn" disabled>
+  Finish
+</button>
+
+<hr>
+
+<p>
+Start Time:
+<span id="start">-</span>
+</p>
+
+<p>
+End Time:
+<span id="end">-</span>
+</p>
+
+<p>
+Running Timer:
+<span id="duration">00:00</span>
+</p>
+
+<a href="clue-d.html">
+  <button>
+    Proceed to Clue to Check Point D
+  </button>
+</a>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/team.js"></script>
+<script src="../js/scoring.js"></script>
+<script src="../js/checkpoint-c.js"></script>
+
+</body>
+
+</html>

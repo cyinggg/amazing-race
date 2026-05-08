@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check Point E</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+</head>
+<body>
+
+<div id="teamInfo"></div>
+
+<h1>Check Point E</h1>
+
+<!-- MUSICAL STATUS -->
+<div id="musicalSection">
+
+  <h2>Musical Status</h2>
+
+  <h3>
+    Instruction
+  </h3>
+
+  <p>
+    When music starts, make your rhythm
+    for 2 minutes.
+  </p>
+
+  <p>
+    Everyone in the team must dance
+    but still within the camera frame
+    to be captured.
+  </p>
+
+  <hr>
+
+  <p>
+    Enter Score Awarded
+  </p>
+
+  <input
+    type="number"
+    id="musicalScore"
+  >
+
+  <p>
+    Enter Password
+  </p>
+
+  <input
+    type="password"
+    id="musicalPassword"
+  >
+
+  <br><br>
+
+  <button id="submitMusical">
+    Submit Score
+  </button>
+
+</div>
+
+<a href="clue-f.html">
+  <button>Proceed to Clue to Check Point F</button>
+</a>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/team.js"></script>
+<script src="../js/scoring.js"></script>
+<script src="../js/checkpoint-e.js"></script>
+
+</body>
+</html>

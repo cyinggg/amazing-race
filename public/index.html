@@ -1,0 +1,27 @@
+<h1>Amazing Race</h1>
+
+<div id="announcement" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: yellow;
+  text-align: center;
+  padding: 10px;
+  display: none;
+  font-weight: bold;
+"></div>
+
+<h2>Login</h2>
+<input id="group" placeholder="Group Number">
+<input id="name" placeholder="Your Name">
+<button onclick="login()">Login</button>
+
+<h2>Ranking</h2>
+<ul id="ranking"></ul>
+
+<h2>Countdown</h2>
+<div id="timer"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="client.js"></script>

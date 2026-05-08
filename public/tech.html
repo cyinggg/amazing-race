@@ -1,0 +1,97 @@
+<h1>Admin Panel</h1>
+
+<script>
+if (localStorage.getItem("tech") !== "true") {
+  window.location.href = "tech-login.html";
+}
+</script>
+
+<h2>Set Countdown (seconds)</h2>
+<input id="seconds" placeholder="Enter seconds">
+<button onclick="setCountdown()">Start Countdown</button>
+
+<h2>Teams & Members</h2>
+<button onclick="getTeams()">Load Teams</button>
+<ul id="teams"></ul>
+
+<input id="msg" placeholder="Announcement">
+<button onclick="announce()">Send</button>
+
+<button onclick="getFiles()">List Files</button>
+<ul id="files"></ul>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+
+function setCountdown() {
+  const seconds = Number(document.getElementById("seconds").value);
+  const endTime = Date.now() + seconds * 1000;
+
+  socket.emit("setCountdown", endTime);
+}
+
+function announce() {
+  const msg = document.getElementById("msg").value;
+  socket.emit("announcement", msg);
+}
+
+async function getTeams() {
+  try {
+    const res = await fetch("/teams");
+
+    if (!res.ok) {
+      console.error("Server error:", res.status);
+      return;
+    }
+
+    const data = await res.json();
+
+    console.log("Teams:", data);
+
+    const list = document.getElementById("teams");
+    list.innerHTML = "";
+
+    data.forEach(team => {
+      const li = document.createElement("li");
+      li.innerText = `Group ${team.group}: ${team.members.join(", ")}`;
+      list.appendChild(li);
+    });
+
+  } catch (err) {
+    console.error("Fetch failed:", err);
+  }
+}
+
+async function getFiles() {
+  const res = await fetch("/files");
+  const data = await res.json();
+
+  const list = document.getElementById("files");
+  list.innerHTML = "";
+
+  for (let group in data) {
+    const g = document.createElement("li");
+    g.innerText = group;
+    list.appendChild(g);
+
+    for (let game in data[group]) {
+      const sub = document.createElement("ul");
+
+      data[group][game].forEach(file => {
+        const li = document.createElement("li");
+
+        const link = document.createElement("a");
+        link.href = file.url;
+        link.innerText = `${game} - ${file.name}`;
+        link.download = file.name;
+
+        li.appendChild(link);
+        sub.appendChild(li);
+      });
+
+      list.appendChild(sub);
+    }
+  }
+}
+</script>

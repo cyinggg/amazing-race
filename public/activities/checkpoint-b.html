@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check Point B</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+</head>
+
+<body>
+
+<div id="teamInfo"></div>
+
+<h1>Check Point B</h1>
+
+<h2>Charade</h2>
+
+<div id="instructionBox">
+
+  <h3>Instructions</h3>
+
+  <p>
+    Select a category and start the game.
+    Act out the phrase without speaking.
+    Click CORRECT if guessed correctly.
+    Click SKIP to move to another phrase.
+  </p>
+
+  <h3>Select Category</h3>
+
+  <select id="category">
+    <option value="sports">Sports</option>
+    <option value="food">Food</option>
+    <option value="animals">Animals</option>
+  </select>
+
+  <br><br>
+
+  <button id="startBtn">Start</button>
+
+</div>
+
+<div id="countdownBox" style="display:none;">
+
+  <h1 id="countdownNumber"></h1>
+
+</div>
+
+<div id="gameBox" style="display:none;">
+
+  <h2>
+    Time Left:
+    <span id="timer">03:00</span>
+  </h2>
+
+  <h1 id="phrase"></h1>
+
+  <button id="correctBtn">
+    Correct
+  </button>
+
+  <button id="skipBtn">
+    Skip
+  </button>
+
+  <h3>
+    Current Score:
+    <span id="currentScore">0</span>
+  </h3>
+
+</div>
+
+<div id="endBox" style="display:none;">
+
+  <h2>Time Up!</h2>
+
+  <p>
+    Final Score:
+    <span id="finalScore"></span>
+  </p>
+
+  <a href="clue-c.html">
+    <button> Proceed to Clue to Check point C </button>
+  </a>
+
+</div>
+
+<script src="../js/team.js"></script>
+<script src="../js/scoring.js"></script>
+<script src="../js/checkpoint-b-game.js"></script>
+
+</body>
+
+</html>

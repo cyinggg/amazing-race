@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check Point F</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    #poseImage {
+      width:300px;
+      border:3px solid black;
+      border-radius:10px;
+      margin-top:20px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="teamInfo"></div>
+
+<h1>Check Point F</h1>
+
+<h2>Pose and Shoot</h2>
+
+<h3>Instruction</h3>
+
+<p>
+  Recreate this pose exactly and take a photo.
+</p>
+
+<p>
+  Accuracy matters more than speed.
+</p>
+
+<p>
+  All members must be in the photo.
+</p>
+
+<p>
+  No editing.
+</p>
+
+<p>
+  Must match pose given as much as possible (background not included).
+</p>
+
+<!-- RANDOM IMAGE -->
+<img
+  id="poseImage"
+  src=""
+>
+
+<!-- <h3>
+  Open the pose reference below.
+</h3>
+
+<a
+  id="poseLink"
+  href="#"
+  target="_blank"
+>
+  <button>
+    Open Pose Reference
+  </button>
+</a> -->
+
+<hr>
+
+<p>
+  Enter Score Awarded
+</p>
+
+<input
+  type="number"
+  id="poseScore"
+>
+
+<p>
+  Enter Password
+</p>
+
+<input
+  type="password"
+  id="posePassword"
+>
+
+<br><br>
+
+<button id="submitPose">
+  Submit Score
+</button>
+
+<br><br>
+
+<a href="clue-finish.html">
+  <button>
+    Proceed to Clue to Finishing Line
+  </button>
+</a>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/team.js"></script>
+<script src="../js/scoring.js"></script>
+<script src="../js/checkpoint-f.js"></script>
+
+</body>
+</html>

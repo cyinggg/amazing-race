@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clue to Check Point F</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    .clueBox {
+      border:2px solid black;
+      padding:20px;
+      margin-bottom:20px;
+      border-radius:10px;
+    }
+
+    .hintBox {
+      display:none;
+      margin-top:20px;
+      padding:15px;
+      background:#fff3cd;
+      border-radius:10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="teamInfo"></div>
+
+<h1>Clue to Check Point F</h1>
+
+<!-- EASY CLUE -->
+<div class="clueBox">
+
+  <h2>Easy Clue</h2>
+
+  <p>
+    I ❤️ SIT
+  </p>
+
+</div>
+
+<!-- HARD CLUE -->
+<div class="clueBox">
+
+  <h2>Hard Clue</h2>
+
+  <p>
+    Solve the crossword puzzle.
+  </p>
+
+</div>
+
+<!-- HINT -->
+<button id="hintBtn">
+  Show Hint (-5 Points)
+</button>
+
+<div
+  id="hintBox"
+  class="hintBox"
+>
+  <h3>
+    Hint: This check point is at Campus Court outside Foogle.
+  </h3>
+</div>
+
+<br><br>
+
+<a href="checkpoint-f.html">
+  <button>
+    Proceed to Check Point F
+  </button>
+</a>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/team.js"></script>
+<script src="../js/scoring.js"></script>
+
+<script>
+
+loadTeam();
+
+// =========================
+// HINT BUTTON
+// =========================
+
+document.getElementById("hintBtn")
+.onclick = async () => {
+
+  // SHOW HINT
+  document.getElementById("hintBox")
+  .style.display = "block";
+
+  // DISABLE BUTTON
+  document.getElementById("hintBtn")
+  .disabled = true;
+
+  // DEDUCT 5 POINTS
+  await updateScore(-5);
+
+  // REFRESH SCORE
+  loadTeam();
+
+  alert("5 points deducted");
+};
+
+</script>
+
+</body>
+</html>

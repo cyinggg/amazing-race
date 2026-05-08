@@ -1,0 +1,71 @@
+<h1>Activity Panel</h1>
+
+<div id="teamHeader" style="
+  background:#222;
+  color:white;
+  padding:15px;
+  border-radius:8px;
+  margin-bottom:15px;
+"></div>
+
+<h2>Race Flow</h2>
+
+<ul>
+  <li><a href="activities/race-briefing.html">Check Point A [Race Briefing]</a></li>
+  <li><a href="activities/clue-b.html">Clue to Check Point B</a></li>
+  <li><a href="activities/checkpoint-b.html">Check Point B [Charade]</a></li>
+  <li><a href="activities/clue-c.html">Clue to Check Point C</a></li>
+  <li><a href="activities/checkpoint-c.html">Check Point C [Hula Hoop Pass]</a></li>
+  <li><a href="activities/clue-d.html">Clue to Check Point D</a></li>
+  <li><a href="activities/checkpoint-d.html">Check Point D [Fast Hand Game Machine | Memory Game]</a></li>
+  <li><a href="activities/clue-e.html">Clue to Check Point E</a></li>
+  <li><a href="activities/checkpoint-e.html">Check Point E [Musical Statues]</a></li>
+  <li><a href="activities/clue-f.html">Clue to Check Point F</a></li>
+  <li><a href="activities/checkpoint-f.html">Check Point F [Pose and Shoot]</a></li>
+  <li><a href="activities/finish.html">Finishing Line</a></li>
+</ul>
+
+<!-- Socket.IO MUST be first -->
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+
+const socket = io();
+
+window.loadDashboardTeam = async function () {
+
+  const group = localStorage.getItem("group");
+
+  if (!group) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  const res = await fetch(`/team/${group}`);
+
+  const data = await res.json();
+
+  const members = data.team?.members || [];
+
+  document.getElementById("teamHeader").innerHTML = `
+    <h2>Group ${group}</h2>
+
+    <p>
+      Members:
+      ${members.join(", ") || "None"}
+    </p>
+
+    <h3>
+      Total Score:
+      ${data.score.total || 0}
+    </h3>
+  `;
+};
+
+socket.on("scoreUpdate", () => {
+  loadDashboardTeam();
+});
+
+loadDashboardTeam();
+
+</script>

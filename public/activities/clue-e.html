@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clue to Check Point E</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    .clueBox {
+      border:2px solid black;
+      padding:20px;
+      margin-bottom:20px;
+      border-radius:10px;
+    }
+
+    .hintBox {
+      margin-top:15px;
+      padding:15px;
+      background:#fff3cd;
+      border-radius:10px;
+      display:none;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="teamInfo"></div>
+
+<h1>Clue to Check Point E</h1>
+
+<!-- EASY CLUE -->
+<div class="clueBox">
+
+  <h2>Easy Clue</h2>
+
+  <p>
+    Crack the following emoji:
+  </p>
+
+  <p>
+    🚌 🛑 along Heritage Trail
+  </p>
+
+</div>
+
+<!-- HARD CLUE -->
+<div class="clueBox">
+
+  <h2>Hard Clue</h2>
+
+  <p>
+    Solve this riddle:
+  </p>
+
+  <p>
+    A busy stop I was for the four wheels
+    that come and go.
+  </p>
+
+  <p>
+    A restful stop I am now for the tired
+    legs that come and go.
+  </p>
+
+</div>
+
+<!-- HINT -->
+<button id="hintBtn">
+  Show Hint (-5 Points)
+</button>
+
+<div
+  id="hintBox"
+  class="hintBox"
+>
+  Hint: Heritage Trail is at Campus Heart
+</div>
+
+<br><br>
+
+<a href="checkpoint-e.html">
+  <button>
+    Proceed to Check Point E
+  </button>
+</a>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/team.js"></script>
+<script src="../js/scoring.js"></script>
+
+<script>
+
+loadTeam();
+
+// =========================
+// HINT BUTTON
+// =========================
+
+document.getElementById("hintBtn")
+.onclick = async () => {
+
+  // SHOW HINT
+  document.getElementById("hintBox")
+  .style.display = "block";
+
+  // DISABLE BUTTON
+  document.getElementById("hintBtn")
+  .disabled = true;
+
+  // DEDUCT 5 POINTS
+  await updateScore(-5);
+
+  // REFRESH TEAM SCORE
+  loadTeam();
+
+  alert("5 points deducted");
+};
+
+</script>
+
+</body>
+</html>
