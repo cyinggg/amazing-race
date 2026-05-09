@@ -9,47 +9,52 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f7f7f7;
+      background: #f4f6f9;
       color: #111;
     }
 
     .topBar {
-      background: #d71920;
+      background: linear-gradient(135deg, #d71920, #a50f15);
       color: white;
-      padding: 25px;
+      padding: 28px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     .topBar h1 {
       margin: 0;
-      font-size: 42px;
-      letter-spacing: 1px;
+      font-size: 40px;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: auto;
-      padding: 35px 20px 50px;
+      padding: 30px 20px 60px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 24px;
     }
 
     .card {
       background: white;
       border-radius: 20px;
       padding: 28px;
-      margin-bottom: 28px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      border-left: 8px solid #d71920;
+      border-top: 8px solid #d71920;
     }
 
     .card h2 {
       margin-top: 0;
       color: #d71920;
-      font-size: 28px;
       margin-bottom: 20px;
+      font-size: 28px;
     }
 
-    input {
+    input,
+    select {
       width: 100%;
       padding: 14px;
       border-radius: 12px;
@@ -59,16 +64,25 @@
       box-sizing: border-box;
     }
 
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #d71920;
+      box-shadow: 0 0 8px rgba(215,25,32,0.2);
+    }
+
     button {
       background: #d71920;
       color: white;
       border: none;
-      padding: 14px 24px;
+      padding: 14px 20px;
       border-radius: 12px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.25s;
+      transition: 0.2s;
+      margin-right: 8px;
+      margin-bottom: 8px;
     }
 
     button:hover {
@@ -76,29 +90,61 @@
       transform: translateY(-2px);
     }
 
-    ul {
-      padding-left: 20px;
+    .danger {
+      background: #dc3545;
     }
 
-    li {
-      margin-bottom: 10px;
-      line-height: 1.6;
+    .danger:hover {
+      background: #bb2d3b;
     }
 
-    a {
-      color: #d71920;
-      text-decoration: none;
+    #liveCountdown {
+      font-size: 28px;
       font-weight: bold;
+      background: #111;
+      color: white;
+      padding: 18px;
+      border-radius: 14px;
+      text-align: center;
+      margin-top: 15px;
     }
 
-    a:hover {
-      text-decoration: underline;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th {
+      background: #d71920;
+      color: white;
+      padding: 14px;
+      text-align: left;
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+
+    tr:hover {
+      background: #fafafa;
+    }
+
+    .memberTag {
+      display: inline-block;
+      background: #f1f1f1;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin: 4px;
+      font-size: 14px;
     }
 
     .footerNote {
       text-align: center;
-      margin-top: 40px;
-      color: #777;
+      margin-top: 50px;
+      color: #666;
       font-size: 14px;
     }
 
@@ -115,75 +161,91 @@ if (localStorage.getItem("tech") !== "true") {
 </script>
 
 <div class="topBar">
-
-  <h1>
-    Admin Panel
-  </h1>
-
+  <h1>Admin Control Panel</h1>
 </div>
 
 <div class="container">
 
-  <!-- COUNTDOWN -->
-  <div class="card">
+  <div class="grid">
 
-    <h2>
-      Set Countdown
-    </h2>
+    <!-- RACE TIMER -->
+    <div class="card">
 
-    <input
-      id="seconds"
-      placeholder="Enter countdown in seconds"
-    >
+      <h2>Race Timer Control</h2>
 
-    <button onclick="setCountdown()">
-      Start Countdown
-    </button>
+      <input
+        type="datetime-local"
+        id="raceEndTime"
+      >
+
+      <button onclick="setRaceTime()">
+        Set Race End Time
+      </button>
+
+      <div id="liveCountdown">
+        No timer set
+      </div>
+
+    </div>
+
+    <!-- ANNOUNCEMENT -->
+    <div class="card">
+
+      <h2>Send Announcement</h2>
+
+      <input
+        id="msg"
+        placeholder="Enter announcement message"
+      >
+
+      <button onclick="announce()">
+        Send Announcement
+      </button>
+
+    </div>
+
+    <!-- EXPORT -->
+    <div class="card">
+
+      <h2>Export Team Data</h2>
+
+      <button onclick="downloadCSV()">
+        Download CSV
+      </button>
+
+    </div>
 
   </div>
 
-  <!-- ANNOUNCEMENT -->
-  <div class="card">
+  <!-- TEAM TABLE -->
+  <div class="card" style="margin-top:24px;">
 
-    <h2>
-      Send Announcement
-    </h2>
+    <h2>Live Team Management</h2>
 
-    <input
-      id="msg"
-      placeholder="Enter announcement message"
-    >
+    <table>
 
-    <button onclick="announce()">
-      Send Announcement
-    </button>
+      <thead>
+        <tr>
+          <th style="width:10%">Team</th>
+          <th style="width:10%">Score</th>
+          <th style="width:35%">Members</th>
+          <th style="width:45%">Actions</th>
+        </tr>
+      </thead>
 
-  </div>
+      <tbody id="teams"></tbody>
 
-  <!-- TEAMS -->
-  <div class="card">
-
-    <h2>
-      Teams & Members
-    </h2>
-
-    <button onclick="getTeams()">
-      Load Teams
-    </button>
-
-    <ul id="teams"></ul>
+    </table>
 
   </div>
 
   <!-- FILES -->
   <div class="card">
 
-    <h2>
-      Uploaded Files
-    </h2>
+    <h2>Uploaded Files</h2>
 
     <button onclick="getFiles()">
-      List Files
+      Refresh Files
     </button>
 
     <ul id="files"></ul>
@@ -202,126 +264,275 @@ if (localStorage.getItem("tech") !== "true") {
 
 const socket = io();
 
-function setCountdown() {
 
-  const seconds =
-  Number(document.getElementById("seconds").value);
+// ==========================
+// LIVE AUTO REFRESH
+// ==========================
 
-  const endTime =
-  Date.now() + seconds * 1000;
+socket.on("teamsUpdated", () => {
+  getTeams();
+});
 
-  socket.emit("setCountdown", endTime);
+socket.on("scoreUpdate", () => {
+  getTeams();
+});
 
-  alert("Countdown Started");
-}
+
+// ==========================
+// ANNOUNCEMENT
+// ==========================
 
 function announce() {
 
   const msg =
-  document.getElementById("msg").value;
+    document.getElementById("msg").value;
 
   socket.emit("announcement", msg);
 
   alert("Announcement Sent");
 }
 
-async function getTeams() {
 
-  try {
+// ==========================
+// SET RACE END TIME
+// ==========================
 
-    const res =
-    await fetch("/teams");
+function setRaceTime() {
 
-    if (!res.ok) {
+  const value =
+    document.getElementById("raceEndTime").value;
 
-      console.error(
-        "Server error:",
-        res.status
-      );
+  if (!value) {
+    alert("Select a date and time");
+    return;
+  }
+
+  const endTime =
+    new Date(value).getTime();
+
+  socket.emit("setCountdown", endTime);
+
+  alert("Race end time updated");
+}
+
+
+// ==========================
+// LIVE COUNTDOWN
+// ==========================
+
+socket.on("countdown", (endTime) => {
+
+  function updateCountdown() {
+
+    const diff =
+      endTime - Date.now();
+
+    const el =
+      document.getElementById("liveCountdown");
+
+    if (diff <= 0) {
+
+      el.innerText = "RACE ENDED";
+      el.style.background = "#dc3545";
 
       return;
     }
 
-    const data =
+    const h =
+      Math.floor(diff / 3600000);
+
+    const m =
+      Math.floor((diff % 3600000) / 60000);
+
+    const s =
+      Math.floor((diff % 60000) / 1000);
+
+    el.innerText =
+      `${h}h ${m}m ${s}s remaining`;
+  }
+
+  updateCountdown();
+
+  setInterval(updateCountdown, 1000);
+});
+
+
+// ==========================
+// LOAD TEAMS
+// ==========================
+
+async function getTeams() {
+
+  const res =
+    await fetch("/teams");
+
+  const data =
     await res.json();
 
-    const list =
+  const tbody =
     document.getElementById("teams");
 
-    list.innerHTML = "";
+  tbody.innerHTML = "";
 
-    data.forEach(team => {
+  data
+    .sort((a, b) => Number(a.group) - Number(b.group))
+    .forEach(team => {
 
-      const li =
-      document.createElement("li");
+      const tr =
+        document.createElement("tr");
 
-      li.innerHTML = `
-        <strong>
-          Group ${team.group}
-        </strong>
-        <br>
-        ${team.members.join(", ")}
+      tr.innerHTML = `
+
+        <td>
+          <strong>
+            ${team.group}
+          </strong>
+        </td>
+
+        <td>
+          ${team.score?.total || 0}
+        </td>
+
+        <td>
+          ${(team.members || [])
+            .map(member => `
+              <span class="memberTag">
+                ${member}
+              </span>
+            `)
+            .join("")}
+        </td>
+
+        <td>
+
+          <button
+            onclick="reassignPrompt('${team.group}')"
+          >
+            Reassign Member
+          </button>
+
+          <button
+            class="danger"
+            onclick="deleteTeam('${team.group}')"
+          >
+            Delete Team
+          </button>
+
+        </td>
       `;
 
-      list.appendChild(li);
+      tbody.appendChild(tr);
     });
-
-  } catch (err) {
-
-    console.error(
-      "Fetch failed:",
-      err
-    );
-  }
 }
+
+
+// ==========================
+// DELETE TEAM
+// ==========================
+
+async function deleteTeam(group) {
+
+  const confirmDelete =
+    confirm(`Delete Team ${group}?`);
+
+  if (!confirmDelete) return;
+
+  await fetch(`/team/${group}`, {
+    method: "DELETE"
+  });
+
+  getTeams();
+}
+
+
+// ==========================
+// REASSIGN MEMBER
+// ==========================
+
+async function reassignPrompt(oldGroup) {
+
+  const member =
+    prompt("Enter member name");
+
+  if (!member) return;
+
+  const newGroup =
+    prompt("Move to which team?");
+
+  if (!newGroup) return;
+
+  await fetch("/reassign-member", {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+      member,
+      oldGroup,
+      newGroup
+    })
+  });
+
+  getTeams();
+}
+
+
+// ==========================
+// DOWNLOAD CSV
+// ==========================
+
+async function downloadCSV() {
+
+  window.location.href =
+    "/export-teams";
+}
+
+
+// ==========================
+// FILES
+// ==========================
 
 async function getFiles() {
 
   const res =
-  await fetch("/files");
+    await fetch("/files");
 
   const data =
-  await res.json();
+    await res.json();
 
   const list =
-  document.getElementById("files");
+    document.getElementById("files");
 
   list.innerHTML = "";
 
   for (let group in data) {
 
     const g =
-    document.createElement("li");
+      document.createElement("li");
 
-    g.innerHTML = `
-      <strong>
-        ${group}
-      </strong>
-    `;
+    g.innerHTML =
+      `<strong>Team ${group}</strong>`;
 
     list.appendChild(g);
 
     for (let game in data[group]) {
 
       const sub =
-      document.createElement("ul");
+        document.createElement("ul");
 
       data[group][game].forEach(file => {
 
         const li =
-        document.createElement("li");
+          document.createElement("li");
 
-        const link =
-        document.createElement("a");
-
-        link.href = file.url;
-
-        link.innerText =
-        `${game} - ${file.name}`;
-
-        link.download = file.name;
-
-        li.appendChild(link);
+        li.innerHTML = `
+          <a href="${file.url}" download>
+            ${game} - ${file.name}
+          </a>
+        `;
 
         sub.appendChild(li);
       });
@@ -330,6 +541,10 @@ async function getFiles() {
     }
   }
 }
+
+
+// INITIAL LOAD
+getTeams();
 
 </script>
 

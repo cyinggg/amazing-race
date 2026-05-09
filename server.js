@@ -51,24 +51,49 @@ const upload = multer({ storage });
 
 // LOGIN
 app.post("/login", (req, res) => {
+
   const { group, name } = req.body;
 
-  let team = teams.find(t => t.group === group);
+  let team =
+    teams.find(t => t.group === group);
 
   if (!team) {
-    team = { group, members: [] };
+
+    team = {
+      group,
+      members: []
+    };
+
     teams.push(team);
   }
 
+  // prevent duplicate members
   if (!team.members.includes(name)) {
     team.members.push(name);
   }
 
+  // create score object if missing
   if (!teamScores[group]) {
-    teamScores[group] = { total: 0};
+
+    teamScores[group] = {
+      total: 0
+    };
   }
 
-  res.send({ success: true });
+  // AUTO SORT TEAM NUMBER
+  teams.sort(
+    (a, b) => Number(a.group) - Number(b.group)
+  );
+
+  // LIVE UPDATE ADMIN PANEL
+  io.emit("teamsUpdated");
+
+  // LIVE UPDATE RANKING
+  io.emit("scoreUpdate", teamScores);
+
+  res.send({
+    success: true
+  });
 });
 
 // TEAM DATA
@@ -157,6 +182,157 @@ app.post("/add-score", (req, res) => {
 });
 
 // UPLOAD
+
+// RANKING
+app.get("/rankings", (req, res) => {
+
+  const ranking = Object.entries(teamScores)
+    .map(([group, data]) => ({
+      group,
+      score: data.total || 0
+    }))
+    .sort((a, b) => b.score - a.score);
+
+  res.json(ranking);
+});
+
+// GET ALL TEAMS
+app.get("/teams", (req, res) => {
+
+  const result = teams.map(team => ({
+
+    group: team.group,
+
+    members: team.members || [],
+
+    score: teamScores[team.group] || {
+      total: 0
+    }
+
+  }));
+
+  result.sort(
+    (a, b) => Number(a.group) - Number(b.group)
+  );
+
+  res.json(result);
+});
+
+
+// DELETE TEAM
+app.delete("/team/:group", (req, res) => {
+
+  const group = req.params.group;
+
+  teams = teams.filter(
+    t => t.group !== group
+  );
+
+  delete teamScores[group];
+
+  fs.writeFileSync(
+    "scores.json",
+    JSON.stringify(teamScores, null, 2)
+  );
+
+  io.emit("teamsUpdated");
+  io.emit("scoreUpdate", teamScores);
+
+  res.json({
+    success: true
+  });
+});
+
+
+// MOVE MEMBER
+app.post("/reassign-member", (req, res) => {
+
+  const {
+    member,
+    oldGroup,
+    newGroup
+  } = req.body;
+
+  const oldTeam =
+    teams.find(t => t.group === oldGroup);
+
+  if (oldTeam) {
+
+    oldTeam.members =
+      oldTeam.members.filter(
+        m => m !== member
+      );
+  }
+
+  let newTeam =
+    teams.find(t => t.group === newGroup);
+
+  if (!newTeam) {
+
+    newTeam = {
+      group: newGroup,
+      members: []
+    };
+
+    teams.push(newTeam);
+  }
+
+  if (!newTeam.members.includes(member)) {
+    newTeam.members.push(member);
+  }
+
+  if (!teamScores[newGroup]) {
+
+    teamScores[newGroup] = {
+      total: 0
+    };
+  }
+
+  teams.sort(
+    (a, b) => Number(a.group) - Number(b.group)
+  );
+
+  io.emit("teamsUpdated");
+
+  res.json({
+    success: true
+  });
+});
+
+
+// EXPORT CSV
+app.get("/export-teams", (req, res) => {
+
+  let csv =
+    "Team,Score,Members\n";
+
+  teams
+    .sort((a, b) =>
+      Number(a.group) - Number(b.group)
+    )
+    .forEach(team => {
+
+      const score =
+        teamScores[team.group]?.total || 0;
+
+      const members =
+        (team.members || []).join(" | ");
+
+      csv +=
+        `${team.group},${score},"${members}"\n`;
+    });
+
+  res.header(
+    "Content-Type",
+    "text/csv"
+  );
+
+  res.attachment(
+    "teams.csv"
+  );
+
+  res.send(csv);
+});
 
 /* ---------------- SOCKET ---------------- */
 io.on("connection", (socket) => {

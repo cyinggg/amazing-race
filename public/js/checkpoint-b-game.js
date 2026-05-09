@@ -40,7 +40,7 @@ let currentPhrase = "";
 
 let currentScore = 0;
 
-let timeLeft = 180;
+let timeLeft = 60;
 
 let timerInterval;
 

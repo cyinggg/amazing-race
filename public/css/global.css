@@ -1,9 +1,63 @@
-body {
-  font-family: Arial;
-  padding: 20px;
+.topBar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:white;
+  padding:15px 20px;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  margin-bottom:25px;
 }
 
-button {
-  padding: 8px 12px;
+.left .groupName {
+  font-weight:bold;
+  color:#c8102e;
+  font-size:18px;
+}
+
+.members {
+  font-size:13px;
+  color:#666;
+}
+
+.score {
+  font-size:16px;
+  font-weight:bold;
+}
+
+.status {
+  font-size:13px;
+  padding:4px 10px;
+  border-radius:10px;
+  background:#28a745;
+  color:white;
+  display:inline-block;
+  margin-top:5px;
+}
+
+.right {
+  text-align:right;
+}
+
+.homeBtn {
+  display:inline-block;
+  padding:6px 12px;
+  background:#111;
+  color:white;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:13px;
+  margin-bottom:5px;
+}
+
+.endTime {
+  font-size: 12px;
+  color: #666;
   margin-top: 5px;
+}
+
+.countdown {
+  font-size:13px;
+  color:#c8102e;
+  font-weight:bold;
 }

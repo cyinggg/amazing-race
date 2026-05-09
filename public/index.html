@@ -181,7 +181,7 @@
   <h2>Race Countdown</h2>
 
   <div id="timer">
-    00:00
+    Loading...
   </div>
 
   <div class="footer">
@@ -192,6 +192,76 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="client.js"></script>
+
+<script>
+
+const RACE_END = new Date("2026-05-20T13:00:00");
+
+function updateLoginTimer() {
+
+  const el = document.getElementById("timer");
+
+  if (!el) return;
+
+  const now = new Date();
+  const diff = RACE_END - now;
+
+  if (diff <= 0) {
+    el.innerText = "🏁 RACE ENDED";
+    el.style.background = "#c8102e";
+    return;
+  }
+
+  const h = Math.floor(diff / (1000 * 60 * 60));
+  const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+  el.innerText = `${h.toString().padStart(2,"0")}:${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
+}
+
+// update every second
+setInterval(updateLoginTimer, 1000);
+updateLoginTimer();
+
+</script>
+
+<script>
+
+const socket = io();
+
+async function loadRanking() {
+
+  try {
+    const res = await fetch("/rankings");
+    const data = await res.json();
+
+    const list = document.getElementById("ranking");
+
+    if (!list) return;
+
+    list.innerHTML = data
+      .map((t, i) => `
+        <li>
+          #${i + 1} 🏆 Team ${t.group} — ${t.score}
+        </li>
+      `)
+      .join("");
+
+  } catch (err) {
+    console.log("Ranking API not ready yet");
+  }
+}
+
+// LIVE UPDATE FROM SERVER
+socket.on("connect", loadRanking);
+
+// fallback auto-refresh (safety)
+setInterval(loadRanking, 10000);
+
+// initial load
+loadRanking();
+
+</script>
 
 </body>
 </html>

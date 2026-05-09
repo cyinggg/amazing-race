@@ -36,13 +36,111 @@
       padding: 30px 20px 50px;
     }
 
+    .dashboardPanel {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 22px;
+      margin-bottom: 35px;
+    }
+
+    .infoCard,
+    .rankingCard {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .infoCard {
+      border-left: 8px solid #40ff15;
+    }
+
+    .rankingCard {
+      background: #111;
+      color: #ff4d4f;
+      border-left: 8px solid #ff0101;
+    }
+
+    .rankingCard h2 {
+      margin-top: 0;
+      color: #ff4d4f;
+      text-shadow: 0 0 8px rgba(255,77,79,0.5);
+    }
+
+    .rankingItem {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      font-size: 17px;
+      color: #ff4d4f;
+    }
+
+    .rankingItem:nth-child(2) {
+      color: gold;
+      font-weight: bold;
+    }
+
+    .rankingItem:nth-child(3) {
+      color: silver;
+      font-weight: bold;
+    }
+
+    .rankingItem:nth-child(4) {
+      color: #cd7f32;
+      font-weight: bold;
+    }
+
+    .liveBadge {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .timerGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .timerBox {
+      background: #fafafa;
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .timerBox .label {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .timerBox .value {
+      font-size: 20px;
+      font-weight: bold;
+      color: #111;
+    }
+
+    @media (max-width: 900px) {
+      .dashboardPanel {
+        grid-template-columns: 1fr;
+      }
+    }
+
     #teamHeader {
       background: white;
       border-radius: 18px;
       padding: 28px;
       margin-bottom: 30px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      border-left: 8px solid #d71920;
+      border-left: 8px solid #40ff15;
     }
 
     #teamHeader h2 {
@@ -128,7 +226,13 @@
 
 <div class="container">
 
-  <div id="teamHeader"></div>
+  <div class="dashboardPanel">
+
+    <div id="teamHeader" class="infoCard"></div>
+
+    <div id="rankingBox" class="rankingCard"></div>
+
+  </div>
 
   <h2 class="sectionTitle">
     Race Flow
@@ -211,6 +315,65 @@
 
 const socket = io();
 
+const RACE_END = new Date("2026-05-20T13:00:00");
+
+let countdownInterval;
+let timeInterval;
+
+function updateTime() {
+  const el = document.getElementById("currentTime");
+  if (el) {
+    el.innerText = new Date().toLocaleTimeString();
+  }
+}
+
+function updateCountdown() {
+
+  const el = document.getElementById("countdown");
+  const status = document.getElementById("raceStatus");
+
+  if (!el || !status) return;
+
+  const now = new Date();
+  const diff = RACE_END - now;
+
+  if (diff <= 0) {
+    el.innerText = "ENDED";
+    status.innerText = "ENDED";
+    status.style.color = "red";
+    clearInterval(countdownInterval);
+    return;
+  }
+
+  const h = Math.floor(diff / (1000 * 60 * 60));
+  const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+  el.innerText = `${h}h ${m}m ${s}s`;
+}
+
+async function loadRanking() {
+
+  try {
+    const res = await fetch("/rankings");
+    const data = await res.json();
+
+    document.getElementById("rankingBox").innerHTML = `
+      <h2>🏆 Live Ranking</h2>
+
+      ${data.map((t, i) => `
+        <div class="rankingItem">
+          <span>#${i + 1} Team ${t.group}</span>
+          <strong>${t.score}</strong>
+        </div>
+      `).join("")}
+    `;
+
+  } catch (err) {
+    console.log("Ranking API missing");
+  }
+}
+
 window.loadDashboardTeam = async function () {
 
   const group = localStorage.getItem("group");
@@ -221,33 +384,69 @@ window.loadDashboardTeam = async function () {
   }
 
   const res = await fetch(`/team/${group}`);
-
   const data = await res.json();
 
   const members = data.team?.members || [];
 
   document.getElementById("teamHeader").innerHTML = `
-    <h2>
-      Group ${group}
-    </h2>
+    <h2>Team ${group}</h2>
 
     <p>
       <strong>Members:</strong><br>
       ${members.join(", ") || "None"}
     </p>
 
-    <h3>
-      Total Score:
-      ${data.score.total || 0}
-    </h3>
+    <h3>Total Score: ${data.score.total || 0}</h3>
+
+    <div class="liveBadge" id="raceStatus">
+      LIVE
+    </div>
+
+    <div class="timerGrid">
+
+      <div class="timerBox">
+        <div class="label">Current Time</div>
+        <div class="value" id="currentTime"></div>
+      </div>
+
+      <div class="timerBox">
+        <div class="label">Race Ends</div>
+        <div class="value">
+          ${RACE_END.toLocaleTimeString()}
+        </div>
+      </div>
+
+      <div class="timerBox">
+        <div class="label">Countdown</div>
+        <div class="value" id="countdown">
+          --:--:--
+        </div>
+      </div>
+
+    </div>
   `;
+
+  updateTime();
+  updateCountdown();
 };
+
+function startTimers() {
+
+  if (timeInterval) clearInterval(timeInterval);
+  if (countdownInterval) clearInterval(countdownInterval);
+
+  timeInterval = setInterval(updateTime, 1000);
+  countdownInterval = setInterval(updateCountdown, 1000);
+}
 
 socket.on("scoreUpdate", () => {
   loadDashboardTeam();
+  loadRanking();
 });
 
 loadDashboardTeam();
+loadRanking();
+startTimers();
 
 </script>
 
