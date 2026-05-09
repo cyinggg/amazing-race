@@ -49,6 +49,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// TECH LOGIN
+app.post("/tech-login", (req, res) => {
+  const { password } = req.body;
+
+  const TECH_PASSWORD = "SIT2009";
+
+  if (password === TECH_PASSWORD) {
+    return res.json({ success: true });
+  }
+
+  res.status(401).json({ success: false });
+});
+
 // LOGIN
 app.post("/login", (req, res) => {
 
