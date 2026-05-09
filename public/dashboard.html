@@ -1,29 +1,208 @@
-<h1>Activity Panel</h1>
+<!DOCTYPE html>
+<html>
+<head>
 
-<div id="teamHeader" style="
-  background:#222;
-  color:white;
-  padding:15px;
-  border-radius:8px;
-  margin-bottom:15px;
-"></div>
+  <title>Activity Panel</title>
 
-<h2>Race Flow</h2>
+  <link rel="stylesheet" href="css/global.css">
 
-<ul>
-  <li><a href="activities/race-briefing.html">Check Point A [Race Briefing]</a></li>
-  <li><a href="activities/clue-b.html">Clue to Check Point B</a></li>
-  <li><a href="activities/checkpoint-b.html">Check Point B [Charade]</a></li>
-  <li><a href="activities/clue-c.html">Clue to Check Point C</a></li>
-  <li><a href="activities/checkpoint-c.html">Check Point C [Hula Hoop Pass]</a></li>
-  <li><a href="activities/clue-d.html">Clue to Check Point D</a></li>
-  <li><a href="activities/checkpoint-d.html">Check Point D [Fast Hand Game Machine | Memory Game]</a></li>
-  <li><a href="activities/clue-e.html">Clue to Check Point E</a></li>
-  <li><a href="activities/checkpoint-e.html">Check Point E [Musical Statues]</a></li>
-  <li><a href="activities/clue-f.html">Clue to Check Point F</a></li>
-  <li><a href="activities/checkpoint-f.html">Check Point F [Pose and Shoot]</a></li>
-  <li><a href="activities/finish.html">Finishing Line</a></li>
-</ul>
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      color: #111;
+    }
+
+    .topBar {
+      background: #d71920;
+      color: white;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .topBar h1 {
+      margin: 0;
+      font-size: 42px;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px 50px;
+    }
+
+    #teamHeader {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-left: 8px solid #d71920;
+    }
+
+    #teamHeader h2 {
+      margin-top: 0;
+      color: #d71920;
+      font-size: 34px;
+    }
+
+    #teamHeader p {
+      font-size: 18px;
+      margin: 15px 0;
+      line-height: 1.7;
+    }
+
+    #teamHeader h3 {
+      margin-top: 20px;
+      font-size: 28px;
+      color: #111;
+    }
+
+    .sectionTitle {
+      font-size: 34px;
+      margin-bottom: 25px;
+      color: #111;
+    }
+
+    .activityGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    .activityCard {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      text-decoration: none;
+      color: #111;
+      transition: 0.25s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-top: 6px solid #d71920;
+    }
+
+    .activityCard:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    }
+
+    .activityCard h3 {
+      margin-top: 0;
+      color: #d71920;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .activityCard p {
+      margin: 0;
+      line-height: 1.7;
+      font-size: 16px;
+      color: #444;
+    }
+
+    .footerNote {
+      margin-top: 40px;
+      text-align: center;
+      color: #666;
+      font-size: 15px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="topBar">
+
+  <h1>
+    Amazing Race Dashboard
+  </h1>
+
+</div>
+
+<div class="container">
+
+  <div id="teamHeader"></div>
+
+  <h2 class="sectionTitle">
+    Race Flow
+  </h2>
+
+  <div class="activityGrid">
+
+    <a class="activityCard" href="activities/race-briefing.html">
+      <h3>Check Point A</h3>
+      <p>Race Briefing</p>
+    </a>
+
+    <a class="activityCard" href="activities/clue-b.html">
+      <h3>Clue to Check Point B</h3>
+      <p>Proceed to next destination</p>
+    </a>
+
+    <a class="activityCard" href="activities/checkpoint-b.html">
+      <h3>Check Point B</h3>
+      <p>Charade Challenge</p>
+    </a>
+
+    <a class="activityCard" href="activities/clue-c.html">
+      <h3>Clue to Check Point C</h3>
+      <p>Proceed to next destination</p>
+    </a>
+
+    <a class="activityCard" href="activities/checkpoint-c.html">
+      <h3>Check Point C</h3>
+      <p>Hula Hoop Pass</p>
+    </a>
+
+    <a class="activityCard" href="activities/clue-d.html">
+      <h3>Clue to Check Point D</h3>
+      <p>Proceed to next destination</p>
+    </a>
+
+    <a class="activityCard" href="activities/checkpoint-d.html">
+      <h3>Check Point D</h3>
+      <p>Fast Hand Game Machine <br> Memory Game</p>
+    </a>
+
+    <a class="activityCard" href="activities/clue-e.html">
+      <h3>Clue to Check Point E</h3>
+      <p>Proceed to next destination</p>
+    </a>
+
+    <a class="activityCard" href="activities/checkpoint-e.html">
+      <h3>Check Point E</h3>
+      <p>Musical Statues</p>
+    </a>
+
+    <a class="activityCard" href="activities/clue-f.html">
+      <h3>Clue to Check Point F</h3>
+      <p>Proceed to next destination</p>
+    </a>
+
+    <a class="activityCard" href="activities/checkpoint-f.html">
+      <h3>Check Point F</h3>
+      <p>Pose and Shoot</p>
+    </a>
+
+    <a class="activityCard" href="activities/finish.html">
+      <h3>Finish Line</h3>
+      <p>Completion of Amazing Race</p>
+    </a>
+
+  </div>
+
+  <div class="footerNote">
+    Brought you by Singapore Institute of Technology
+  </div>
+
+</div>
 
 <!-- Socket.IO MUST be first -->
 <script src="/socket.io/socket.io.js"></script>
@@ -48,10 +227,12 @@ window.loadDashboardTeam = async function () {
   const members = data.team?.members || [];
 
   document.getElementById("teamHeader").innerHTML = `
-    <h2>Group ${group}</h2>
+    <h2>
+      Group ${group}
+    </h2>
 
     <p>
-      Members:
+      <strong>Members:</strong><br>
       ${members.join(", ") || "None"}
     </p>
 
@@ -69,3 +250,6 @@ socket.on("scoreUpdate", () => {
 loadDashboardTeam();
 
 </script>
+
+</body>
+</html>

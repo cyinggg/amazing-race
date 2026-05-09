@@ -1,27 +1,197 @@
-<h1>Amazing Race</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Amazing Race Login</title>
 
-<div id="announcement" style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: yellow;
-  text-align: center;
-  padding: 10px;
-  display: none;
-  font-weight: bold;
-"></div>
+  <link rel="stylesheet" href="style.css">
 
-<h2>Login</h2>
-<input id="group" placeholder="Group Number">
-<input id="name" placeholder="Your Name">
-<button onclick="login()">Login</button>
+  <style>
 
-<h2>Ranking</h2>
-<ul id="ranking"></ul>
+    body {
+      margin:0;
+      padding:0;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
 
-<h2>Countdown</h2>
-<div id="timer"></div>
+    /* TOP ANNOUNCEMENT */
+    #announcement {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      background:#c8102e;
+      color:white;
+      text-align:center;
+      padding:14px;
+      display:none;
+      font-weight:bold;
+      z-index:999;
+      box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      max-width:500px;
+      margin:80px auto;
+      background:white;
+      padding:40px;
+      border-radius:18px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+      border-top:8px solid #c8102e;
+    }
+
+    .logo {
+      text-align:center;
+      font-size:60px;
+      margin-bottom:10px;
+    }
+
+    h1 {
+      text-align:center;
+      color:#c8102e;
+      margin:0;
+      font-size:40px;
+    }
+
+    .subtitle {
+      text-align:center;
+      color:#666;
+      margin-top:10px;
+      margin-bottom:35px;
+      line-height:1.6;
+    }
+
+    h2 {
+      color:#c8102e;
+      margin-top:30px;
+      margin-bottom:15px;
+    }
+
+    input {
+      width:100%;
+      padding:14px;
+      margin-bottom:15px;
+      border:2px solid #ddd;
+      border-radius:10px;
+      font-size:16px;
+      box-sizing:border-box;
+      transition:0.2s;
+    }
+
+    input:focus {
+      outline:none;
+      border-color:#c8102e;
+      box-shadow:0 0 8px rgba(200,16,46,0.2);
+    }
+
+    button {
+      width:100%;
+      padding:15px;
+      background:#c8102e;
+      color:white;
+      border:none;
+      border-radius:10px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    button:hover {
+      background:#a60d26;
+      transform:translateY(-2px);
+    }
+
+    #ranking {
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+
+    #ranking li {
+      background:#fafafa;
+      margin-bottom:10px;
+      padding:14px;
+      border-radius:10px;
+      border-left:6px solid #c8102e;
+      font-weight:bold;
+    }
+
+    #timer {
+      background:#111;
+      color:white;
+      text-align:center;
+      font-size:36px;
+      font-weight:bold;
+      padding:20px;
+      border-radius:12px;
+      letter-spacing:2px;
+    }
+
+    .footer {
+      margin-top:35px;
+      padding-top:20px;
+      border-top:1px solid #e0e0e0;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      line-height:1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="announcement"></div>
+
+<div class="container">
+
+  <div class="logo">
+    🏁
+  </div>
+
+  <h1>Amazing Race</h1>
+
+  <p class="subtitle">
+    Punggol Digital District<br>
+    Team Challenge Adventure
+  </p>
+
+  <h2>Participant Login</h2>
+
+  <input
+    id="group"
+    placeholder="Enter Group Number"
+  >
+
+  <input
+    id="name"
+    placeholder="Enter Your Name"
+  >
+
+  <button onclick="login()">
+    Login
+  </button>
+
+  <h2>Live Ranking</h2>
+
+  <ul id="ranking"></ul>
+
+  <h2>Race Countdown</h2>
+
+  <div id="timer">
+    00:00
+  </div>
+
+  <div class="footer">
+    Brought you by Singapore Institute of Technology
+  </div>
+
+</div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="client.js"></script>
+
+</body>
+</html>

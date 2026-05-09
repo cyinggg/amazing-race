@@ -1,23 +1,160 @@
-<h1>Tech Login</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tech Login</title>
 
-<input id="password" type="password" placeholder="Enter password">
-<button onclick="login()">Login</button>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    body {
+      margin:0;
+      padding:0;
+      font-family:Arial, sans-serif;
+      background:#ffffff;
+      color:#111;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+
+    .loginCard {
+      width:380px;
+      background:white;
+      border-radius:18px;
+      padding:40px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.12);
+      text-align:center;
+      border-top:8px solid #c8102e;
+    }
+
+    .logo {
+      font-size:55px;
+      margin-bottom:10px;
+    }
+
+    h1 {
+      margin:0;
+      color:#c8102e;
+      font-size:32px;
+    }
+
+    .subtitle {
+      color:#666;
+      margin-top:10px;
+      margin-bottom:30px;
+      line-height:1.6;
+    }
+
+    input {
+      width:100%;
+      padding:14px;
+      font-size:16px;
+      border:2px solid #ddd;
+      border-radius:10px;
+      margin-bottom:20px;
+      box-sizing:border-box;
+      transition:0.2s;
+    }
+
+    input:focus {
+      outline:none;
+      border-color:#c8102e;
+      box-shadow:0 0 8px rgba(200,16,46,0.25);
+    }
+
+    button {
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:10px;
+      background:#c8102e;
+      color:white;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    button:hover {
+      background:#a60d26;
+      transform:translateY(-2px);
+    }
+
+    .footer {
+      margin-top:25px;
+      color:#777;
+      font-size:13px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="loginCard">
+
+  <div class="logo">
+    🔐
+  </div>
+
+  <h1>Tech Login</h1>
+
+  <p class="subtitle">
+    Amazing Race Management System<br>
+    Authorized Personnel Only
+  </p>
+
+  <input
+    id="password"
+    type="password"
+    placeholder="Enter Tech Password"
+  >
+
+  <button onclick="login()">
+    Login
+  </button>
+
+  <div class="footer">
+    Brought you by Singapore Institute of Technology
+  </div>
+
+</div>
 
 <script>
+
 async function login() {
-  const password = document.getElementById("password").value;
+
+  const password =
+  document.getElementById("password").value;
 
   const res = await fetch("/tech-login", {
+
     method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ password })
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+      password
+    })
   });
 
   if (res.ok) {
+
     localStorage.setItem("tech", "true");
+
     window.location.href = "tech.html";
+
   } else {
+
     alert("Wrong password");
   }
 }
+
 </script>
+
+</body>
+</html>

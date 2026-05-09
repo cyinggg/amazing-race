@@ -1,4 +1,4 @@
-const answer = "LEVEL 1 TIERED STEPS NEAR START POINT";
+const answer = "LEVEL B TIERED STEPS NEAR START POINT";
 
 const clues = [
   "11","4","21","4","11",

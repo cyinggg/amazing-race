@@ -4,12 +4,147 @@
   <title>Finish</title>
 
   <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    body {
+      margin:0;
+      padding:30px;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    .pageCard {
+      max-width:900px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:50px 40px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.12);
+      border-top:10px solid #c8102e;
+      text-align:center;
+    }
+
+    .title {
+      font-size:42px;
+      color:#c8102e;
+      margin-bottom:10px;
+    }
+
+    .subtitle {
+      color:#666;
+      font-size:18px;
+      margin-bottom:35px;
+    }
+
+    .card {
+      background:#fff5f5;
+      border-left:6px solid #d71920;
+      border-radius:16px;
+      padding:30px;
+      margin-top:25px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      text-align:center;
+    }
+
+    .bigText {
+      font-size:20px;
+      line-height:1.8;
+      color:#444;
+    }
+
+    .trophy {
+      font-size:70px;
+      margin:20px 0;
+    }
+
+    .scoreBox {
+      margin-top:25px;
+      background:#111;
+      color:white;
+      border-radius:16px;
+      padding:25px;
+      font-size:18px;
+    }
+
+    .highlight {
+      color:#ff4d6d;
+      font-size:26px;
+      font-weight:bold;
+      display:block;
+      margin-top:10px;
+    }
+
+    .footer {
+      margin-top:40px;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      border-top:1px solid #ddd;
+      padding-top:20px;
+    }
+
+  </style>
 </head>
+
 <body>
 
-<h1>
-Congratulations on completing the amazing race!
-</h1>
+<div id="teamInfo"></div>
+
+<div class="pageCard">
+
+  <!-- TITLE -->
+  <h1 class="title">
+    🎉 Congratulations!
+  </h1>
+
+  <p class="subtitle">
+    You have successfully completed the Amazing Race
+  </p>
+
+  <!-- CELEBRATION -->
+  <div class="trophy">
+    🏆
+  </div>
+
+  <div class="card">
+
+    <div class="bigText">
+
+      Great teamwork, communication and perseverance throughout all checkpoints.
+
+      <br><br>
+
+      You have solved clues, completed challenges and reached the final destination.
+
+    </div>
+
+  </div>
+
+  <!-- SCORE SECTION (optional future use) -->
+  <div class="scoreBox">
+
+    Final Mission Status
+
+    <span class="highlight">
+      COMPLETED
+    </span>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+
+    Amazing Race<br>
+
+    <strong style="color:#c8102e;">
+      Brought to you by Singapore Institute of Technology
+    </strong>
+
+  </div>
+
+</div>
 
 </body>
 </html>

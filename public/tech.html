@@ -1,4 +1,112 @@
-<h1>Admin Panel</h1>
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Admin Panel</title>
+
+  <style>
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      color: #111;
+    }
+
+    .topBar {
+      background: #d71920;
+      color: white;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .topBar h1 {
+      margin: 0;
+      font-size: 42px;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 20px 50px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-left: 8px solid #d71920;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #d71920;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #d71920;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    button:hover {
+      background: #b31217;
+      transform: translateY(-2px);
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #d71920;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .footerNote {
+      text-align: center;
+      margin-top: 40px;
+      color: #777;
+      font-size: 14px;
+    }
+
+  </style>
+
+</head>
+
+<body>
 
 <script>
 if (localStorage.getItem("tech") !== "true") {
@@ -6,87 +114,215 @@ if (localStorage.getItem("tech") !== "true") {
 }
 </script>
 
-<h2>Set Countdown (seconds)</h2>
-<input id="seconds" placeholder="Enter seconds">
-<button onclick="setCountdown()">Start Countdown</button>
+<div class="topBar">
 
-<h2>Teams & Members</h2>
-<button onclick="getTeams()">Load Teams</button>
-<ul id="teams"></ul>
+  <h1>
+    Admin Panel
+  </h1>
 
-<input id="msg" placeholder="Announcement">
-<button onclick="announce()">Send</button>
+</div>
 
-<button onclick="getFiles()">List Files</button>
-<ul id="files"></ul>
+<div class="container">
+
+  <!-- COUNTDOWN -->
+  <div class="card">
+
+    <h2>
+      Set Countdown
+    </h2>
+
+    <input
+      id="seconds"
+      placeholder="Enter countdown in seconds"
+    >
+
+    <button onclick="setCountdown()">
+      Start Countdown
+    </button>
+
+  </div>
+
+  <!-- ANNOUNCEMENT -->
+  <div class="card">
+
+    <h2>
+      Send Announcement
+    </h2>
+
+    <input
+      id="msg"
+      placeholder="Enter announcement message"
+    >
+
+    <button onclick="announce()">
+      Send Announcement
+    </button>
+
+  </div>
+
+  <!-- TEAMS -->
+  <div class="card">
+
+    <h2>
+      Teams & Members
+    </h2>
+
+    <button onclick="getTeams()">
+      Load Teams
+    </button>
+
+    <ul id="teams"></ul>
+
+  </div>
+
+  <!-- FILES -->
+  <div class="card">
+
+    <h2>
+      Uploaded Files
+    </h2>
+
+    <button onclick="getFiles()">
+      List Files
+    </button>
+
+    <ul id="files"></ul>
+
+  </div>
+
+  <div class="footerNote">
+    Singapore Institute of Technology Amazing Race System
+  </div>
+
+</div>
 
 <script src="/socket.io/socket.io.js"></script>
+
 <script>
+
 const socket = io();
 
 function setCountdown() {
-  const seconds = Number(document.getElementById("seconds").value);
-  const endTime = Date.now() + seconds * 1000;
+
+  const seconds =
+  Number(document.getElementById("seconds").value);
+
+  const endTime =
+  Date.now() + seconds * 1000;
 
   socket.emit("setCountdown", endTime);
+
+  alert("Countdown Started");
 }
 
 function announce() {
-  const msg = document.getElementById("msg").value;
+
+  const msg =
+  document.getElementById("msg").value;
+
   socket.emit("announcement", msg);
+
+  alert("Announcement Sent");
 }
 
 async function getTeams() {
+
   try {
-    const res = await fetch("/teams");
+
+    const res =
+    await fetch("/teams");
 
     if (!res.ok) {
-      console.error("Server error:", res.status);
+
+      console.error(
+        "Server error:",
+        res.status
+      );
+
       return;
     }
 
-    const data = await res.json();
+    const data =
+    await res.json();
 
-    console.log("Teams:", data);
+    const list =
+    document.getElementById("teams");
 
-    const list = document.getElementById("teams");
     list.innerHTML = "";
 
     data.forEach(team => {
-      const li = document.createElement("li");
-      li.innerText = `Group ${team.group}: ${team.members.join(", ")}`;
+
+      const li =
+      document.createElement("li");
+
+      li.innerHTML = `
+        <strong>
+          Group ${team.group}
+        </strong>
+        <br>
+        ${team.members.join(", ")}
+      `;
+
       list.appendChild(li);
     });
 
   } catch (err) {
-    console.error("Fetch failed:", err);
+
+    console.error(
+      "Fetch failed:",
+      err
+    );
   }
 }
 
 async function getFiles() {
-  const res = await fetch("/files");
-  const data = await res.json();
 
-  const list = document.getElementById("files");
+  const res =
+  await fetch("/files");
+
+  const data =
+  await res.json();
+
+  const list =
+  document.getElementById("files");
+
   list.innerHTML = "";
 
   for (let group in data) {
-    const g = document.createElement("li");
-    g.innerText = group;
+
+    const g =
+    document.createElement("li");
+
+    g.innerHTML = `
+      <strong>
+        ${group}
+      </strong>
+    `;
+
     list.appendChild(g);
 
     for (let game in data[group]) {
-      const sub = document.createElement("ul");
+
+      const sub =
+      document.createElement("ul");
 
       data[group][game].forEach(file => {
-        const li = document.createElement("li");
 
-        const link = document.createElement("a");
+        const li =
+        document.createElement("li");
+
+        const link =
+        document.createElement("a");
+
         link.href = file.url;
-        link.innerText = `${game} - ${file.name}`;
+
+        link.innerText =
+        `${game} - ${file.name}`;
+
         link.download = file.name;
 
         li.appendChild(link);
+
         sub.appendChild(li);
       });
 
@@ -94,4 +330,8 @@ async function getFiles() {
     }
   }
 }
+
 </script>
+
+</body>
+</html>

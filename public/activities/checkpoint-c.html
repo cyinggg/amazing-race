@@ -4,55 +4,310 @@
   <title>Check Point C</title>
 
   <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    body {
+      margin:0;
+      padding:30px;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    .pageCard {
+      max-width:900px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+      border-top:8px solid #c8102e;
+      text-align:center;
+    }
+
+    .title {
+      color:#c8102e;
+      font-size:40px;
+      margin-bottom:5px;
+    }
+
+    .subtitle {
+      color:#666;
+      font-size:18px;
+      margin-bottom:30px;
+    }
+
+    /* Shared card style */
+    .card {
+      border-radius:16px;
+      padding:25px;
+      margin:20px auto;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    /* Instruction card */
+    .instructionCard {
+      background:#fff5f5;
+      border-left:6px solid #d71920;
+      text-align:left;
+      line-height:1.8;
+      font-size:16px;
+      color:#444;
+    }
+
+    /* Control card */
+    .controlCard {
+      background: #fffdf5;
+      border-left: 6px solid #ffc021;
+      text-align:center;
+      max-width:600px;
+    }
+
+    button {
+      padding:14px 26px;
+      margin:10px 6px;
+      border:none;
+      border-radius:12px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    /* Start button */
+    #startBtn {
+      background:#28a745;
+      color:white;
+    }
+
+    #startBtn:hover {
+      background:#218838;
+      transform:scale(1.05);
+    }
+
+    /* Restart button */
+    #restartBtn {
+      background:#00b7ff;
+      color:white;
+    }
+
+    #restartBtn:hover {
+      background:#e68900;
+      transform:scale(1.05);
+    }
+
+    /* Finish button */
+    #finishBtn {
+      background:#c8102e;
+      color:white;
+    }
+
+    #finishBtn:hover:enabled {
+      background:#a10d24;
+      transform:scale(1.05);
+    }
+
+    #finishBtn:disabled {
+      opacity:0.5;
+      cursor:not-allowed;
+    }
+
+    /* Timer section */
+    .timerCard {
+      background:#111;
+      color:white;
+      border-radius:18px;
+      padding:30px;
+      margin-top:25px;
+    }
+
+    .timerTitle {
+      color:#ff4d6d;
+      font-size:24px;
+      margin-bottom:25px;
+    }
+
+    .timerGrid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+      gap:20px;
+    }
+
+    .timerItem {
+      background:#1e1e1e;
+      border:2px solid #333;
+      border-radius:14px;
+      padding:18px;
+    }
+
+    .timerLabel {
+      color:#aaa;
+      font-size:14px;
+      margin-bottom:10px;
+    }
+
+    .timerValue {
+      font-size:28px;
+      font-weight:bold;
+      color:white;
+    }
+
+    #duration {
+      color:#ff4d6d;
+    }
+
+    /* Next button */
+    .nextBtnWrapper {
+      display:flex;
+      justify-content:center;
+      margin-top:30px;
+    }
+
+    .nextBtn {
+      display:block;
+      width:fit-content;
+      padding:16px 36px;
+      font-size:18px;
+      font-weight:bold;
+      border-radius:14px;
+      background:#d71920;
+      color:white;
+      text-decoration:none;
+      transition:0.25s;
+    }
+
+    .nextBtn:hover {
+      background:#b31217;
+      transform:scale(1.04);
+    }
+
+    .footer {
+      margin-top:40px;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      border-top:1px solid #ddd;
+      padding-top:20px;
+    }
+
+  </style>
 </head>
 
 <body>
 
 <div id="teamInfo"></div>
 
-<h1>Check Point C</h1>
+<div class="pageCard">
 
-<h2>Hula Hoop Pass</h2>
+  <!-- HEADER -->
+  <h1 class="title">Check Point C</h1>
 
-<p>
-  Please pass your device to teacher in-charge.
-  Teacher in-charge to start the timer when team ready and end when completed.
-</p>
+  <p class="subtitle">
+    Hula Hoop Pass
+  </p>
 
-<button id="startBtn">
-  Start
-</button>
+  <!-- INSTRUCTIONS -->
+  <div class="card instructionCard">
 
-<button id="restartBtn">
-  Restart
-</button>
+    <strong>Instructions</strong>
 
-<button id="finishBtn" disabled>
-  Finish
-</button>
+    <br><br>
 
-<hr>
+    Please pass your device to the teacher in-charge.<br>
+    The teacher in-charge should start the timer once the team is ready,
+    and stop the timer upon completion.
 
-<p>
-Start Time:
-<span id="start">-</span>
-</p>
+  </div>
 
-<p>
-End Time:
-<span id="end">-</span>
-</p>
+  <!-- CONTROLS -->
+  <div class="card controlCard">
 
-<p>
-Running Timer:
-<span id="duration">00:00</span>
-</p>
+    <h2>Timer Controls</h2>
 
-<a href="clue-d.html">
-  <button>
-    Proceed to Clue to Check Point D
-  </button>
-</a>
+    <button id="startBtn">
+      Start
+    </button>
+
+    <button id="restartBtn">
+      Restart
+    </button>
+
+    <button id="finishBtn" disabled>
+      Finish
+    </button>
+
+  </div>
+
+  <!-- TIMER DISPLAY -->
+  <div class="timerCard">
+
+    <div class="timerTitle">
+      ⏱ Challenge Timer
+    </div>
+
+    <div class="timerGrid">
+
+      <div class="timerItem">
+
+        <div class="timerLabel">
+          Start Time
+        </div>
+
+        <div class="timerValue" id="start">
+          -
+        </div>
+
+      </div>
+
+      <div class="timerItem">
+
+        <div class="timerLabel">
+          End Time
+        </div>
+
+        <div class="timerValue" id="end">
+          -
+        </div>
+
+      </div>
+
+      <div class="timerItem">
+
+        <div class="timerLabel">
+          Running Timer
+        </div>
+
+        <div class="timerValue" id="duration">
+          00:00
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- NEXT -->
+  <div class="nextBtnWrapper">
+
+    <a href="clue-d.html" class="nextBtn">
+      Proceed to Clue to Check Point D
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Amazing Race<br>
+
+    <strong style="color:#c8102e;">
+      Brought to you by Singapore Institute of Technology
+    </strong>
+
+  </div>
+
+</div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="../js/team.js"></script>
@@ -60,5 +315,4 @@ Running Timer:
 <script src="../js/checkpoint-c.js"></script>
 
 </body>
-
 </html>

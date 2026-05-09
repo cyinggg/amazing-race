@@ -7,24 +7,221 @@
 
   <style>
 
-    .hidden {
-      display:none;
+    body {
+      margin:0;
+      padding:30px;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    .pageCard {
+      max-width:1000px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+      border-top:8px solid #c8102e;
+      text-align:center;
+    }
+
+    .title {
+      color:#c8102e;
+      font-size:42px;
+      margin-bottom:8px;
+    }
+
+    .subtitle {
+      color:#666;
+      font-size:18px;
+      margin-bottom:35px;
+    }
+
+    /* Shared cards */
+    .card {
+      border-radius:16px;
+      padding:25px;
+      margin:20px auto;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);;
+    }
+
+    /* Instructions */
+    .instructionCard {
+      background:#fff5f5;
+      border-left:6px solid #d71920;
+      text-align:left;
+      line-height:1.8;
+      font-size:16px;
+      color:#444;
+    }
+
+    /* Activity selection */
+    .activityCard {
+      background: #fffdf5;
+      border-left: 6px solid #ffc021;
+      text-align:center;
+      max-width:600px;
+    }
+
+    .activityButtons {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+      margin-top:20px;
+    }
+
+    /* Dark game stage */
+    .gameStage {
+      background:#111;
+      color:white;
+      border-radius:18px;
+      padding:35px;
+      margin-top:25px;
+    }
+
+    .gameTitle {
+      color:#ff4d6d;
+      font-size:28px;
+      margin-bottom:20px;
+    }
+
+    /* Buttons */
+    button {
+      padding:14px 28px;
+      border:none;
+      border-radius:12px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+      margin:8px;
+    }
+
+    button:hover {
+      transform:scale(1.05);
+    }
+
+    #chooseFast,
+    #chooseMemory {
+      background:#00bfff;
+      color:white;
+    }
+
+    #chooseFast:hover,
+    #chooseMemory:hover {
+      background:#00bfff;
+    }
+
+    #submitFast,
+    #submitMemory,
+    #startMemoryBtn {
+      background:#28a745;
+      color:white;
+    }
+
+    #submitFast:hover,
+    #submitMemory:hover,
+    #startMemoryBtn:hover {
+      background:#218838;
+    }
+
+    input {
+      padding:12px;
+      border-radius:10px;
+      border:none;
+      font-size:16px;
+      margin:10px 0;
+      width:250px;
+      max-width:100%;
+    }
+
+    /* Memory game */
+    #memoryTimer {
+      font-size:40px;
+      color:#ff4d6d;
+      margin-bottom:15px;
+    }
+
+    #memoryInstruction {
+      color:#ddd;
+      line-height:1.6;
+      margin-bottom:20px;
+    }
+
+    #memoryDisplay {
+      font-size:60px;
+      font-weight:bold;
+      margin:30px 0;
+      color:white;
+      min-height:80px;
+    }
+
+    #memoryInputs {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      margin-top:20px;
     }
 
     .numberBox {
-      width:60px;
-      padding:10px;
-      margin:5px;
+      width:65px;
+      padding:12px;
       text-align:center;
       font-size:18px;
+      border-radius:10px;
+      border:none;
     }
 
     .correct {
       background:lightgreen;
+      color:black;
     }
 
     .wrong {
       background:#ffb3b3;
+      color:black;
+    }
+
+    .hidden {
+      display:none;
+    }
+
+    /* Next button */
+    .nextBtnWrapper {
+      display:flex;
+      justify-content:center;
+      margin-top:35px;
+    }
+
+    .nextBtn {
+      display:block;
+      width:fit-content;
+      padding:16px 36px;
+      font-size:18px;
+      font-weight:bold;
+      border-radius:14px;
+      background:#d71920;
+      color:white;
+      text-decoration:none;
+      transition:0.25s;
+    }
+
+    .nextBtn:hover {
+      background:#b31217;
+      transform:scale(1.04);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top:40px;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      border-top:1px solid #ddd;
+      padding-top:20px;
     }
 
   </style>
@@ -34,88 +231,139 @@
 
 <div id="teamInfo"></div>
 
-<h1>Check Point D</h1>
+<div class="pageCard">
 
-<h2>Choose ONE Activity</h2>
+  <!-- HEADER -->
+  <h1 class="title">
+    Check Point D
+  </h1>
 
-<button id="chooseFast">
-  Fast Hand Game Machine
-</button>
-
-<button id="chooseMemory">
-  Memory Game
-</button>
-
-<hr>
-
-<!-- FAST HAND -->
-<div id="fastSection" class="hidden">
-
-  <h2>Fast Hand Game Machine</h2>
-
-  <p>
-    Enter Number of Catch
+  <p class="subtitle">
+    Choose ONE Activity
   </p>
 
-  <input
-    type="number"
-    id="catchInput"
-  >
+  <!-- INSTRUCTIONS -->
+  <div class="card instructionCard">
 
-  <p>
-    Enter Password
-  </p>
+    <strong>Instructions</strong>
 
-  <input
-    type="password"
-    id="fastPassword"
-  >
+    <br><br>
 
-  <br><br>
+    Teams are only allowed to attempt ONE activity.<br>
 
-  <button id="submitFast">
-    Submit
-  </button>
+    Choose carefully before starting the challenge.
+
+  </div>
+
+  <!-- ACTIVITY SELECTION -->
+  <div class="card activityCard">
+
+    <h2>Select Your Activity</h2>
+
+    <div class="activityButtons">
+
+      <button id="chooseFast">
+        Fast Hand Game Machine
+      </button>
+
+      <button id="chooseMemory">
+        Memory Game
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- FAST HAND -->
+  <div id="fastSection" class="gameStage hidden">
+
+    <div class="gameTitle">
+      ⚡ Fast Hand Game Machine
+    </div>
+
+    <p>
+      Enter Number of Catch
+    </p>
+
+    <input
+      type="number"
+      id="catchInput"
+    >
+
+    <br>
+
+    <p>
+      Enter Password
+    </p>
+
+    <input
+      type="password"
+      id="fastPassword"
+    >
+
+    <br><br>
+
+    <button id="submitFast">
+      Submit
+    </button>
+
+  </div>
+
+  <!-- MEMORY GAME -->
+  <div id="memorySection" class="gameStage hidden">
+
+    <div class="gameTitle">
+      🧠 Memory Game
+    </div>
+
+    <h3 id="memoryTimer">
+      01:00
+    </h3>
+
+    <h4 id="memoryInstruction">
+      Memorise the numbers shown in sequence carefully.
+    </h4>
+
+    <button id="startMemoryBtn">
+      Start Memory Game
+    </button>
+
+    <p id="gameStatus"></p>
+
+    <div id="memoryDisplay"></div>
+
+    <div id="memoryInputs"></div>
+
+    <button
+      id="submitMemory"
+      class="hidden"
+    >
+      Submit Answers
+    </button>
+
+  </div>
+
+  <!-- NEXT -->
+  <div class="nextBtnWrapper">
+
+    <a href="clue-e.html" class="nextBtn">
+      Proceed to Clue to Check Point E
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+
+    Amazing Race<br>
+
+    <strong style="color:#c8102e;">
+      Brought to you by Singapore Institute of Technology
+    </strong>
+
+  </div>
 
 </div>
-
-<!-- MEMORY GAME -->
-<div id="memorySection" class="hidden">
-
-  <h2>Memory Game</h2>
-
-  <h3 id="memoryTimer"> 01:00 </h3>
-
-  <h4 id="memoryInstruction">
-    Memorise the numbers shown in sequence carefully. You will be tested after the display ends.
-  </h4>
-
-  <button id="startMemoryBtn">
-    Start Memory Game
-  </button>
-
-  <p id="gameStatus"></p>
-
-  <div id="memoryDisplay"></div>
-
-  <div id="memoryInputs"></div>
-
-  <button
-    id="submitMemory"
-    class="hidden"
-  >
-    Submit Answers
-  </button>
-
-</div>
-
-<br><br>
-
-<a href="clue-e.html">
-  <button>
-    Proceed to Clue to Check Point E
-  </button>
-</a>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="../js/team.js"></script>

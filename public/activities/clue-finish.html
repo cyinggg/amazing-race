@@ -4,20 +4,203 @@
   <title>Clue to Finishing Line</title>
 
   <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    body {
+      margin:0;
+      padding:30px;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    .pageCard {
+      max-width:900px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+      border-top:8px solid #c8102e;
+    }
+
+    .title {
+      text-align:center;
+      color:#c8102e;
+      font-size:40px;
+      margin-bottom:10px;
+    }
+
+    .subtitle {
+      text-align:center;
+      color:#666;
+      font-size:18px;
+      margin-bottom:35px;
+    }
+
+    /* Shared card */
+    .card {
+      border-radius:16px;
+      padding:25px;
+      margin-bottom:25px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    /* Instruction style */
+    .instructionCard {
+      background:#fff5f5;
+      border-left:6px solid #d71920;
+      color:#444;
+      line-height:1.8;
+      text-align:left;
+    }
+
+    /* Clue style (dark) */
+    .clueCard {
+      background:#111;
+      color:white;
+    }
+
+    .clueTitle {
+      color:#ff4d6d;
+      font-size:24px;
+      margin-bottom:18px;
+    }
+
+    .clueText {
+      color:#ddd;
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    .emoji {
+      font-size:44px;
+      text-align:center;
+      margin-top:15px;
+    }
+
+    /* Next button */
+    .nextBtnWrapper {
+      display:flex;
+      justify-content:center;
+      margin-top:35px;
+    }
+
+    .nextBtn {
+      display:block;
+      width:fit-content;
+      padding:16px 36px;
+      font-size:18px;
+      font-weight:bold;
+      border-radius:14px;
+      background:#d71920;
+      color:white;
+      text-decoration:none;
+      transition:0.25s;
+    }
+
+    .nextBtn:hover {
+      background:#b31217;
+      transform:scale(1.04);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top:40px;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      border-top:1px solid #ddd;
+      padding-top:20px;
+    }
+
+  </style>
 </head>
+
 <body>
 
 <div id="teamInfo"></div>
 
-<h1>Clue to Finishing Line</h1>
+<div class="pageCard">
 
-<p>Easy Clue: Solve this riddle. Go back to where this race begins.</p>
+  <!-- HEADER -->
+  <h1 class="title">
+    Clue to Finishing Line
+  </h1>
 
-<p>Hard Clue: Solve this riddle. The end is the beginning.</p>
+  <p class="subtitle">
+    Final Challenge
+  </p>
 
-<a href="finish.html">
-  <button>Proceed to Finishing line</button>
-</a>
+  <!-- INSTRUCTION -->
+  <div class="card instructionCard">
+
+    <strong>Instructions</strong>
+
+    <br><br>
+
+    Work together to solve the final clues and identify the finishing location.<br><br>
+
+    No hints are provided at this stage. Trust your teamwork and memory from earlier checkpoints.
+
+  </div>
+
+  <!-- EASY CLUE -->
+  <div class="card clueCard">
+
+    <div class="clueTitle">
+      Easy Clue
+    </div>
+
+    <div class="clueText">
+
+      Solve this riddle:<br><br>
+
+      Go back to where this race begins.
+
+    </div>
+
+  </div>
+
+  <!-- HARD CLUE -->
+  <div class="card clueCard">
+
+    <div class="clueTitle">
+      Hard Clue
+    </div>
+
+    <div class="clueText">
+
+      Solve this final riddle:<br><br>
+
+      The end is the beginning.
+
+    </div>
+
+  </div>
+
+  <!-- NEXT -->
+  <div class="nextBtnWrapper">
+
+    <a href="finish.html" class="nextBtn">
+      Proceed to Finishing Line
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+
+    Amazing Race<br>
+
+    <strong style="color:#c8102e;">
+      Brought to you by Singapore Institute of Technology
+    </strong>
+
+  </div>
+
+</div>
 
 <script src="../js/team.js"></script>
 

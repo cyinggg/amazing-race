@@ -7,11 +7,192 @@
 
   <style>
 
+    body {
+      margin:0;
+      padding:30px;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    .pageCard {
+      max-width:950px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+      border-top:8px solid #c8102e;
+    }
+
+    .title {
+      text-align:center;
+      color:#c8102e;
+      font-size:42px;
+      margin-bottom:10px;
+    }
+
+    .subtitle {
+      text-align:center;
+      color:#666;
+      font-size:18px;
+      margin-bottom:35px;
+    }
+
+    /* Shared card */
+    .card {
+      border-radius:16px;
+      padding:25px;
+      margin-bottom:25px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    /* Instruction card */
+    .instructionCard {
+      background:#fff5f5;
+      border-left:6px solid #d71920;
+      color:#444;
+      line-height:1.8;
+    }
+
+    /* Pose challenge stage */
+    .poseStage {
+      background:#111;
+      color:white;
+      border-radius:18px;
+      padding:35px;
+      text-align:center;
+    }
+
+    .stageTitle {
+      color:#ff4d6d;
+      font-size:28px;
+      margin-bottom:20px;
+    }
+
+    .stageText {
+      color:#ddd;
+      line-height:1.8;
+      margin-bottom:30px;
+    }
+
+    /* Pose image */
+    .imageWrapper {
+      display:flex;
+      justify-content:center;
+      margin:30px 0;
+    }
+
     #poseImage {
-      width:300px;
-      border:3px solid black;
-      border-radius:10px;
+      width:100%;
+      max-width:420px;
+      border-radius:18px;
+      border:5px solid #333;
+      box-shadow:0 10px 25px rgba(0,0,0,0.35);
+      object-fit:cover;
+      background:#222;
+    }
+
+    /* Optional external link */
+    .poseLinkWrapper {
       margin-top:20px;
+    }
+
+    .poseLink {
+      display:inline-block;
+      padding:12px 24px;
+      border-radius:12px;
+      background:#ff9800;
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.2s;
+    }
+
+    .poseLink:hover {
+      background:#e68900;
+      transform:scale(1.05);
+    }
+
+    /* Input area */
+    .scoreSection {
+      margin-top:35px;
+    }
+
+    .inputLabel {
+      color:#ddd;
+      margin-top:18px;
+      margin-bottom:10px;
+      font-size:16px;
+    }
+
+    input {
+      width:280px;
+      max-width:100%;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      font-size:16px;
+    }
+
+    /* Buttons */
+    button {
+      padding:14px 28px;
+      border:none;
+      border-radius:12px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    button:hover {
+      transform:scale(1.05);
+    }
+
+    #submitPose {
+      margin-top:25px;
+      background:#28a745;
+      color:white;
+    }
+
+    #submitPose:hover {
+      background:#218838;
+    }
+
+    /* Next button */
+    .nextBtnWrapper {
+      display:flex;
+      justify-content:center;
+      margin-top:35px;
+    }
+
+    .nextBtn {
+      display:block;
+      width:fit-content;
+      padding:16px 36px;
+      font-size:18px;
+      font-weight:bold;
+      border-radius:14px;
+      background:#d71920;
+      color:white;
+      text-decoration:none;
+      transition:0.25s;
+    }
+
+    .nextBtn:hover {
+      background:#b31217;
+      transform:scale(1.04);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top:40px;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      border-top:1px solid #ddd;
+      padding-top:20px;
     }
 
   </style>
@@ -21,85 +202,127 @@
 
 <div id="teamInfo"></div>
 
-<h1>Check Point F</h1>
+<div class="pageCard">
 
-<h2>Pose and Shoot</h2>
+  <!-- HEADER -->
+  <h1 class="title">
+    Check Point F
+  </h1>
 
-<h3>Instruction</h3>
+  <p class="subtitle">
+    Pose and Shoot Challenge
+  </p>
 
-<p>
-  Recreate this pose exactly and take a photo.
-</p>
+  <!-- INSTRUCTIONS -->
+  <div class="card instructionCard">
 
-<p>
-  Accuracy matters more than speed.
-</p>
+    <strong>Instructions</strong>
 
-<p>
-  All members must be in the photo.
-</p>
+    <br><br>
 
-<p>
-  No editing.
-</p>
+    Recreate the pose shown as accurately as possible.<br><br>
 
-<p>
-  Must match pose given as much as possible (background not included).
-</p>
+    Accuracy matters more than speed.<br><br>
 
-<!-- RANDOM IMAGE -->
-<img
-  id="poseImage"
-  src=""
->
+    All team members must appear in the photo.<br><br>
 
-<!-- <h3>
-  Open the pose reference below.
-</h3>
+    No editing is allowed.<br><br>
 
-<a
-  id="poseLink"
-  href="#"
-  target="_blank"
->
-  <button>
-    Open Pose Reference
-  </button>
-</a> -->
+    Match the pose closely. Background recreation is not required.
 
-<hr>
+  </div>
 
-<p>
-  Enter Score Awarded
-</p>
+  <!-- POSE STAGE -->
+  <div class="poseStage">
 
-<input
-  type="number"
-  id="poseScore"
->
+    <div class="stageTitle">
+      📸 Pose Reference
+    </div>
 
-<p>
-  Enter Password
-</p>
+    <div class="stageText">
 
-<input
-  type="password"
-  id="posePassword"
->
+      Observe the reference image carefully before taking your team photo.
 
-<br><br>
+    </div>
 
-<button id="submitPose">
-  Submit Score
-</button>
+    <!-- LOCAL OR EXTERNAL IMAGE -->
+    <div class="imageWrapper">
 
-<br><br>
+      <img
+        id="poseImage"
+        src=""
+      >
 
-<a href="clue-finish.html">
-  <button>
-    Proceed to Clue to Finishing Line
-  </button>
-</a>
+    </div>
+
+    <!-- OPTIONAL EXTERNAL IMAGE LINK -->
+    <!--
+    <div class="poseLinkWrapper">
+
+      <a
+        id="poseLink"
+        href="#"
+        target="_blank"
+        class="poseLink"
+      >
+        Open Full Reference Image
+      </a>
+
+    </div>
+    -->
+
+    <!-- SCORE SECTION -->
+    <div class="scoreSection">
+
+      <div class="inputLabel">
+        Enter Score Awarded
+      </div>
+
+      <input
+        type="number"
+        id="poseScore"
+      >
+
+      <div class="inputLabel">
+        Enter Password
+      </div>
+
+      <input
+        type="password"
+        id="posePassword"
+      >
+
+      <br>
+
+      <button id="submitPose">
+        Submit Score
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- NEXT -->
+  <div class="nextBtnWrapper">
+
+    <a href="clue-finish.html" class="nextBtn">
+      Proceed to Clue to Finishing Line
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+
+    Amazing Race<br>
+
+    <strong style="color:#c8102e;">
+      Brought to you by Singapore Institute of Technology
+    </strong>
+
+  </div>
+
+</div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="../js/team.js"></script>

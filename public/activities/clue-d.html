@@ -4,26 +4,223 @@
   <title>Clue to Check Point D</title>
 
   <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    body {
+      margin:0;
+      padding:30px;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    .pageCard {
+      max-width:900px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+      border-top:8px solid #c8102e;
+    }
+
+    .title {
+      text-align:center;
+      color:#c8102e;
+      font-size:40px;
+      margin-bottom:10px;
+    }
+
+    .subtitle {
+      text-align:center;
+      color:#666;
+      font-size:18px;
+      margin-bottom:35px;
+    }
+
+    /* Shared card */
+    .card {
+      background:#fff5f5;
+      border-left:6px solid #d71920;
+      border-radius:16px;
+      padding:25px;
+      margin-bottom:25px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    /* Clue styling */
+    .clueTitle {
+      color:#c8102e;
+      font-size:24px;
+      margin-bottom:15px;
+    }
+
+    .clueText {
+      line-height:1.8;
+      color:#444;
+      font-size:16px;
+    }
+
+    /* Hard clue darker style */
+    .hardClue {
+      background:#111;
+      border-left:none;
+      color:white;
+    }
+
+    .hardClue .clueTitle {
+      color:#ff4d6d;
+    }
+
+    .hardClue .clueText {
+      color:#ddd;
+    }
+
+    .routeList {
+      margin-top:15px;
+      padding-left:20px;
+    }
+
+    .routeList li {
+      margin-bottom:12px;
+    }
+
+    /* Next button */
+    .nextBtnWrapper {
+      display:flex;
+      justify-content:center;
+      margin-top:35px;
+    }
+
+    .nextBtn {
+      display:block;
+      width:fit-content;
+      padding:16px 36px;
+      font-size:18px;
+      font-weight:bold;
+      border-radius:14px;
+      background:#d71920;
+      color:white;
+      text-decoration:none;
+      transition:0.25s;
+    }
+
+    .nextBtn:hover {
+      background:#b31217;
+      transform:scale(1.04);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top:40px;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      border-top:1px solid #ddd;
+      padding-top:20px;
+    }
+
+  </style>
 </head>
+
 <body>
 
 <div id="teamInfo"></div>
 
-<h1>Clue to Check Point D</h1>
+<div class="pageCard">
 
-<p>Easy Clue: Route direction. See the map below.<br>
-  The next check point is here on ground level.
-</p>
+  <!-- HEADER -->
+  <h1 class="title">
+    Clue to Check Point D
+  </h1>
 
-<p>Hard Clue: Trace the following route direction.<br>
-  Photo of the Forum,<br>
-  Photo of Canopy,<br>
-  Photo of path towards OASIS.
-</p>
+  <p class="subtitle">
+    Route Navigation Challenge
+  </p>
 
-<a href="checkpoint-d.html">
-  <button>Proceed to Check Point D</button>
-</a>
+    <!-- INSTRUCTION -->
+  <div class="card">
+
+    <div class="clueTitle">
+      Instructions
+    </div>
+
+    <div class="clueText">
+
+      The team may attempt any clue.<br><br>
+
+      However, using a hint will deduct 5 points from the score.<br><br>
+
+      Choose wisely and work together to solve them.
+
+    </div>
+
+  </div>
+
+  <!-- EASY CLUE -->
+  <div class="card hardClue">
+
+    <div class="clueTitle">
+      Easy Clue
+    </div>
+
+    <div class="clueText">
+
+      Route direction can be found from the map below.<br><br>
+
+      The next check point is located here on the ground level.
+
+    </div>
+
+  </div>
+
+  <!-- HARD CLUE -->
+  <div class="card hardClue">
+
+    <div class="clueTitle">
+      Hard Clue
+    </div>
+
+    <div class="clueText">
+
+      Trace the following route direction carefully:
+
+      <ul class="routeList">
+
+        <li>Photo of the Forum</li>
+
+        <li>Photo of Canopy</li>
+
+        <li>Photo of the path towards OASIS</li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- NEXT BUTTON -->
+  <div class="nextBtnWrapper">
+
+    <a href="checkpoint-d.html" class="nextBtn">
+      Proceed to Check Point D
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+
+    Amazing Race<br>
+
+    <strong style="color:#c8102e;">
+      Brought to you by Singapore Institute of Technology
+    </strong>
+
+  </div>
+
+</div>
 
 <script src="../js/team.js"></script>
 

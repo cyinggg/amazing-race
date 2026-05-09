@@ -4,26 +4,222 @@
   <title>Check Point B</title>
 
   <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    body {
+      margin:0;
+      padding:30px;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    .pageCard {
+      max-width:900px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+      border-top:8px solid #c8102e;
+      text-align:center;
+    }
+
+    .title {
+      color:#c8102e;
+      font-size:40px;
+      margin-bottom:5px;
+    }
+
+    .subtitle {
+      color:#666;
+      font-size:18px;
+      margin-bottom:30px;
+    }
+
+    /* GAME FLOW CARDS */
+    .card {
+      border-radius:16px;
+      padding:25px;
+      margin:20px auto;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    /* Instruction card aligned left */
+    .instructionCard {
+      background: #fff5f5;
+      border-left: 6px solid #d71920;
+      text-align:left;
+    }
+
+    /* Category card centered */
+    .categoryCard {
+      background: #fffdf5;
+      border-left: 6px solid #ffc021;
+      text-align:center;
+      max-width:500px;
+    }
+
+    /* Instruction styling */
+    .instructionText {
+      line-height:1.7;
+      color:#444;
+      font-size:16px;
+      margin-bottom:20px;
+    }
+
+    select {
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid #ccc;
+      font-size:16px;
+      margin-top:10px;
+    }
+
+    button {
+      padding:14px 26px;
+      margin:10px 6px;
+      border:none;
+      border-radius:12px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    /* START emphasis */
+    #startBtn {
+      background:#c8102e;
+      color:white;
+      padding:16px 34px;
+    }
+
+    #startBtn:hover {
+      background:#a10d24;
+      transform:scale(1.05);
+    }
+
+    /* GAME STAGE */
+    .gameStage {
+      background:#111;
+      color:white;
+      border-radius:18px;
+      padding:35px;
+    }
+
+    #phrase {
+      font-size:46px;
+      margin:25px 0;
+      letter-spacing:1px;
+    }
+
+    #timer {
+      color:#ff4d6d;
+      font-weight:bold;
+    }
+
+    #correctBtn {
+      background:#28a745;
+      color:white;
+    }
+
+    #skipBtn {
+      background:#ff9800;
+      color:white;
+    }
+
+    #correctBtn:hover {
+      transform:scale(1.05);
+      background:#218838;
+    }
+
+    #skipBtn:hover {
+      transform:scale(1.05);
+      background:#e68900;
+    }
+
+    .scoreText {
+      margin-top:15px;
+      color:#ddd;
+    }
+
+    /* COUNTDOWN */
+    #countdownNumber {
+      font-size:90px;
+      color:#000000;
+    }
+
+    /* END SCREEN */
+    .endBox {
+      background:white;
+      padding:30px;
+      border-radius:18px;
+      margin-top:20px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .nextBtnWrapper {
+      display:flex;
+      justify-content:center;
+      margin-top:20px;
+    }
+
+    .nextBtn {
+      display:block;
+      width:fit-content;
+      padding:16px 36px;
+      font-size:18px;
+      font-weight:bold;
+      border-radius:14px;
+      background:#d71920;
+      color:white;
+      text-decoration:none;
+      transition:0.25s;
+    }
+
+    .nextBtn:hover {
+      background:#b31217;
+      transform:scale(1.04);
+    }
+
+    .footer {
+      margin-top:40px;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      border-top:1px solid #ddd;
+      padding-top:20px;
+    }
+
+  </style>
 </head>
 
 <body>
 
 <div id="teamInfo"></div>
 
-<h1>Check Point B</h1>
+<div class="pageCard">
 
-<h2>Charade</h2>
+  <!-- HEADER -->
+  <h1 class="title">Check Point B</h1>
+  <p class="subtitle">Charade Challenge</p>
 
-<div id="instructionBox">
+  <!-- INSTRUCTION CARD -->
+<div id="instructionBox" class="card instructionCard">
 
-  <h3>Instructions</h3>
+  <h2>Instruction</h2>
 
-  <p>
-    Select a category and start the game.
-    Act out the phrase without speaking.
-    Click CORRECT if guessed correctly.
-    Click SKIP to move to another phrase.
-  </p>
+  <div class="instructionText">
+    Select a category and start the game.<br>
+    Act out the phrase without speaking.<br>
+    Your team guesses it within the time limit.
+  </div>
+
+</div>
+
+<!-- CATEGORY CARD -->
+<div class="card categoryCard">
 
   <h3>Select Category</h3>
 
@@ -35,52 +231,57 @@
 
   <br><br>
 
-  <button id="startBtn">Start</button>
+  <button id="startBtn">Start Game</button>
 
 </div>
 
-<div id="countdownBox" style="display:none;">
+  <!-- STEP 2: COUNTDOWN -->
+  <div id="countdownBox" style="display:none;">
+    <h1 id="countdownNumber"></h1>
+  </div>
 
-  <h1 id="countdownNumber"></h1>
+  <!-- STEP 3: GAME -->
+  <div id="gameBox" class="gameStage" style="display:none;">
 
-</div>
+    <h2>
+      Time Left: <span id="timer">03:00</span>
+    </h2>
 
-<div id="gameBox" style="display:none;">
+    <h1 id="phrase"></h1>
 
-  <h2>
-    Time Left:
-    <span id="timer">03:00</span>
-  </h2>
+    <button id="correctBtn">Correct</button>
+    <button id="skipBtn">Skip</button>
 
-  <h1 id="phrase"></h1>
+    <div class="scoreText">
+      Score: <span id="currentScore">0</span>
+    </div>
 
-  <button id="correctBtn">
-    Correct
-  </button>
+  </div>
 
-  <button id="skipBtn">
-    Skip
-  </button>
+  <!-- STEP 4: RESULT -->
+  <div id="endBox" class="endBox" style="display:none;">
 
-  <h3>
-    Current Score:
-    <span id="currentScore">0</span>
-  </h3>
+    <h2>Time's Up!</h2>
 
-</div>
+    <p>
+      Final Score: <span id="finalScore"></span>
+    </p>
 
-<div id="endBox" style="display:none;">
+    <div class="nextBtnWrapper">
+      <a href="clue-c.html" class="nextBtn">
+        Proceed to Check Point C
+      </a>
+    </div>
 
-  <h2>Time Up!</h2>
+  </div>
 
-  <p>
-    Final Score:
-    <span id="finalScore"></span>
-  </p>
-
-  <a href="clue-c.html">
-    <button> Proceed to Clue to Check point C </button>
-  </a>
+  <!-- FOOTER -->
+  <div class="footer">
+    Amazing Race<br>
+    <strong style="color:#c8102e;">
+      Brought to you by Singapore Institute of Technology
+    </strong>
+  </div>
 
 </div>
 
@@ -89,5 +290,4 @@
 <script src="../js/checkpoint-b-game.js"></script>
 
 </body>
-
 </html>

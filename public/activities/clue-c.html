@@ -4,23 +4,187 @@
   <title>Clue to Check Point C</title>
 
   <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    body {
+      margin:0;
+      padding:30px;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    .pageCard {
+      max-width:900px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+      border-top:8px solid #c8102e;
+      text-align:center;
+    }
+
+    .title {
+      color:#c8102e;
+      font-size:40px;
+      margin-bottom:10px;
+    }
+
+    .subtitle {
+      color:#666;
+      font-size:18px;
+      margin-bottom:25px;
+    }
+
+    .instructionBox {
+      background:#fff5f5;
+      border-left:6px solid #c8102e;
+      padding:20px;
+      border-radius:12px;
+      margin-bottom:25px;
+      text-align:left;
+      line-height:1.7;
+      font-size:16px;
+    }
+
+    .riddleBox {
+      background:#111;
+      color:white;
+      padding:30px;
+      border-radius:18px;
+      margin:25px 0;
+      text-align:left;
+    }
+
+    .riddleTitle {
+      text-align:center;
+      font-size:22px;
+      color:#ff4d6d;
+      margin-bottom:20px;
+    }
+
+    /* if JS injects riddles */
+    #riddles {
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+    }
+
+    .riddleItem {
+      background:#1e1e1e;
+      padding:15px;
+      border-radius:12px;
+      border:1px solid #333;
+    }
+
+    button {
+      padding:16px 34px;
+      font-size:16px;
+      font-weight:bold;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      transition:0.25s;
+    }
+
+    .nextBtnWrapper {
+      display:flex;
+      justify-content:center;
+      margin-top:25px;
+    }
+
+    .nextBtn {
+      display:block;
+      width:fit-content;
+      padding:16px 36px;
+      font-size:18px;
+      font-weight:bold;
+      border-radius:14px;
+      background:#d71920;
+      color:white;
+      text-decoration:none;
+      transition:0.25s;
+    }
+
+    .nextBtn:hover {
+      background:#b31217;
+      transform:scale(1.04);
+    }
+
+    .hintNote {
+      font-size:13px;
+      color:#777;
+      margin-top:10px;
+    }
+
+    .footer {
+      margin-top:40px;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      border-top:1px solid #ddd;
+      padding-top:20px;
+    }
+
+  </style>
+
 </head>
+
 <body>
 
 <div id="teamInfo"></div>
 
-<h1>Clue to Check Point C</h1>
+<div class="pageCard">
 
-<p>
-The team has the freedom to check out any riddle.
-However 5 points will be deducted if use hint.
-</p>
+  <h1 class="title">Clue to Check Point C</h1>
+  <p class="subtitle">Riddle Challenge</p>
 
-<div id="riddles"></div>
+  <!-- INSTRUCTIONS -->
+  <div class="instructionBox">
 
-<a href="checkpoint-c.html">
-  <button>Proceed to Check Point C</button>
-</a>
+    <strong>Mission Rules</strong>
+    <br><br>
+
+    The team may attempt any riddle in any order.<br>
+    However, using a hint will deduct 5 points from the score.<br><br>
+
+    Choose wisely and work together to solve them.
+
+  </div>
+
+  <!-- RIDDLES -->
+  <div class="riddleBox">
+
+    <div class="riddleTitle">
+      🧩 Riddles
+    </div>
+
+    <div id="riddles"></div>
+
+    <div class="hintNote">
+      Hint usage will reduce your score by 5 points.
+    </div>
+
+  </div>
+
+  <!-- NEXT -->
+  <div class="nextBtnWrapper">
+    <a href="checkpoint-c.html" class="nextBtn">
+      Proceed to Check Point C
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Amazing Race<br>
+    <strong style="color:#c8102e;">
+      Brought to you by Singapore Institute of Technology
+    </strong>
+  </div>
+
+</div>
 
 <script src="../js/team.js"></script>
 <script src="../js/scoring.js"></script>

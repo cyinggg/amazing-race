@@ -4,32 +4,232 @@
   <title>Clue to Check Point B</title>
 
   <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+
+    body {
+      margin:0;
+      padding:30px;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    .pageCard {
+      max-width:1000px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+      border-top:8px solid #c8102e;
+    }
+
+    .title {
+      text-align:center;
+      color:#c8102e;
+      font-size:42px;
+      margin-bottom:10px;
+    }
+
+    .subtitle {
+      text-align:center;
+      color:#666;
+      font-size:18px;
+      margin-bottom:35px;
+    }
+
+    .instructionBox {
+      background:#fff5f5;
+      border-left:6px solid #c8102e;
+      padding:20px;
+      border-radius:12px;
+      margin-bottom:30px;
+      line-height:1.8;
+      font-size:17px;
+    }
+
+    .codeCard {
+      background:#111;
+      color:white;
+      border-radius:16px;
+      padding:30px;
+      margin-bottom:35px;
+    }
+
+    .codeTitle {
+      text-align:center;
+      font-size:24px;
+      margin-bottom:25px;
+      color:#ff4d6d;
+    }
+
+    .codeGrid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));
+      gap:15px;
+    }
+
+    .codeItem {
+      background:#1e1e1e;
+      border:2px solid #333;
+      border-radius:12px;
+      padding:14px;
+      text-align:center;
+      font-weight:bold;
+      font-size:18px;
+      transition:0.2s;
+    }
+
+    .codeItem:hover {
+      border-color:#c8102e;
+      transform:translateY(-3px);
+    }
+
+    .clueSection {
+      text-align:center;
+      margin-top:40px;
+    }
+
+    .clueTitle {
+      color:#c8102e;
+      font-size:26px;
+      margin-bottom:20px;
+    }
+
+    #codeBoxes {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+    }
+
+    .footer {
+      margin-top:40px;
+      text-align:center;
+      color:#777;
+      font-size:13px;
+      border-top:1px solid #ddd;
+      padding-top:20px;
+    }
+
+    .nextBtn {
+      display: block;
+      width: fit-content;
+      margin: 45px auto 0;
+      padding: 18px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 14px;
+      background: #d71920;
+      color: white;
+      cursor: pointer;
+      transition: 0.25s;
+      text-decoration: none;
+    }
+
+    .nextBtn:hover {
+      background: #b31217;
+      transform: scale(1.04);
+    }
+
+  </style>
 </head>
+
 <body>
 
 <div id="teamInfo"></div>
 
-<h1>Clue to Check Point B</h1>
+<div class="pageCard">
 
-<p>
-Team has to crack the following code.
-</p>
+  <h1 class="title">
+    Clue to Check Point B
+  </h1>
 
-<p>
-0=A 1=B 2=C 3=D 4=E 5=F 6=G 7=H 8=I 9=J
-10=K 11=L 12=M 13=N 14=O 15=P 16=Q
-17=R 18=S 19=T 20=U 21=V 22=W 23=X 24=Y 25=Z
-</p>
+  <p class="subtitle">
+    Check Point A
+  </p>
 
-<div id="codeBoxes" style="
-display:flex;
-flex-wrap:wrap;
-align-items:flex-end;
-"></div>
+  <div class="instructionBox">
 
-<a href="checkpoint-b.html">
-  <button>Proceed to Check Point B</button>
-</a>
+    <strong>
+      Mission Brief
+    </strong>
+
+    <br><br>
+
+    Team has to crack the following secret code
+    to discover the next destination.
+
+  </div>
+
+  <div class="codeCard">
+
+    <div class="codeTitle">
+      🔐 Code Reference Table
+    </div>
+
+    <div class="codeGrid">
+
+      <div class="codeItem">0 = A</div>
+      <div class="codeItem">1 = B</div>
+      <div class="codeItem">2 = C</div>
+      <div class="codeItem">3 = D</div>
+      <div class="codeItem">4 = E</div>
+      <div class="codeItem">5 = F</div>
+      <div class="codeItem">6 = G</div>
+      <div class="codeItem">7 = H</div>
+      <div class="codeItem">8 = I</div>
+      <div class="codeItem">9 = J</div>
+
+      <div class="codeItem">10 = K</div>
+      <div class="codeItem">11 = L</div>
+      <div class="codeItem">12 = M</div>
+      <div class="codeItem">13 = N</div>
+      <div class="codeItem">14 = O</div>
+      <div class="codeItem">15 = P</div>
+      <div class="codeItem">16 = Q</div>
+      <div class="codeItem">17 = R</div>
+      <div class="codeItem">18 = S</div>
+      <div class="codeItem">19 = T</div>
+
+      <div class="codeItem">20 = U</div>
+      <div class="codeItem">21 = V</div>
+      <div class="codeItem">22 = W</div>
+      <div class="codeItem">23 = X</div>
+      <div class="codeItem">24 = Y</div>
+      <div class="codeItem">25 = Z</div>
+
+    </div>
+
+  </div>
+
+  <div class="clueSection">
+
+    <div class="clueTitle">
+      🧩 Decode the Location
+    </div>
+
+    <div id="codeBoxes"></div>
+
+  </div>
+
+  <div class="nextBtnWrapper">
+
+    <a href="checkpoint-b.html" class="nextBtn">
+      Proceed to Clue to Check Point B
+    </a>
+    
+  </div>
+
+  <div class="footer">
+    Amazing Race<br>
+    <strong style="color:#c8102e;">
+      Brought you by Singapore Institute of Technology
+    </strong>
+  </div>
+
+</div>
 
 <script src="../js/team.js"></script>
 <script src="../js/checkpoint-a.js"></script>
