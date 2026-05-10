@@ -79,21 +79,13 @@
     }
 
     .crosswordGrid{
+      display:grid;
+      grid-template-columns: repeat(10, 55px);
+      grid-auto-rows: 55px;
+      gap:6px;
+      justify-content:center;
       margin-top:35px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      align-items:flex-start;
-    }
-
-    .cwRow{
-      display:flex;
-      gap:6px;
-      position: relative;
-    }
-
-    .cwCell, .empty{
-      flex: 0 0 55px;
+      position:relative;
     }
 
     .cwCell{
@@ -104,11 +96,15 @@
       border-radius:12px;
       position:relative;
       overflow:hidden;
-      transition:0.2s;
     }
 
-    .cwCell:hover{
-      transform:scale(1.03);
+    /* DOWN (I HEART SIT) styling only */
+    .crosswordGrid .cwCell.reveal[style*="grid-row:1"],
+    .crosswordGrid .cwCell.reveal[style*="grid-row:7"],
+    .crosswordGrid .cwCell.reveal[style*="grid-row:8"],
+    .crosswordGrid .cwCell.reveal[style*="grid-row:9"] {
+      background: #2563eb !important;   /* blue */
+      border-color: #60a5fa !important;
     }
 
     .cwInput{
@@ -122,10 +118,6 @@
       font-size:26px;
       font-weight:bold;
       text-transform:uppercase;
-    }
-
-    .cwInput:focus{
-      background:#2a2a2a;
     }
 
     .correct{
@@ -310,220 +302,147 @@
 
     </div>
 
-    <!-- CROSSWORD -->
     <div class="crosswordGrid">
 
-      <!-- ROW 1 -->
-      <div class="cwRow">
-
-        <div class="empty"></div>
-        <div class="empty"></div>
-        <div class="empty"></div>
-
-        <!-- I -->
-        <div class="cwCell reveal">
-          <input class="cwInput" value="I" readonly>
-        </div>
-
-      </div>
-
-      <!-- ROW 2 : HIGH -->
-      <div class="cwRow">
-
-        <div class="cwCell">
-          <span class="numberTag">1</span>
-          <input class="cwInput" maxlength="1" data-answer="H">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="I">
-        </div>
-
-        <div class="cwCell reveal">
-          <input class="cwInput" value="G" readonly>
-        </div>
-
-        <!-- SHARED H -->
-        <div class="cwCell shared">
-          <input class="cwInput" maxlength="1" data-answer="H">
-        </div>
-
-      </div>
-
-      <!-- ROW 3 : SEVEN -->
-      <div class="cwRow">
-
-        <div class="empty"></div>
-
-        <div class="cwCell">
-          <span class="numberTag">2</span>
-          <input class="cwInput" maxlength="1" data-answer="S">
-        </div>
-
-        <!-- SHARED E -->
-        <div class="cwCell shared">
-          <input class="cwInput" maxlength="1" data-answer="E">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="V">
-        </div>
-
-        <div class="cwCell reveal">
-          <input class="cwInput" value="E" readonly>
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="N">
-        </div>
-
-      </div>
-
-      <!-- ROW 4 : SINGAPORE -->
-      <div class="cwRow">
-
-        <div class="cwCell">
-          <span class="numberTag">3</span>
-          <input class="cwInput" maxlength="1" data-answer="S">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="I">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="N">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="G">
-        </div>
-
-        <!-- SHARED A -->
-        <div class="cwCell shared">
-          <input class="cwInput" maxlength="1" data-answer="A">
-        </div>
-
-        <div class="cwCell reveal">
-          <input class="cwInput" value="P" readonly>
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="O">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="R">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="E">
-        </div>
-
-      </div>
-
-      <!-- ROW 5 : STAR -->
-      <div class="cwRow">
-
-        <div class="empty"></div>
-        <div class="empty"></div>
-
-        <div class="cwCell">
-          <span class="numberTag">4</span>
-          <input class="cwInput" maxlength="1" data-answer="S">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="T">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="A">
-        </div>
-
-        <!-- SHARED R -->
-        <div class="cwCell shared">
-          <input class="cwInput" maxlength="1" data-answer="R">
-        </div>
-
-      </div>
-
-      <!-- ROW 6 : TAYLOR -->
-      <div class="cwRow">
-
-        <div class="empty"></div>
-
-        <!-- SHARED T -->
-        <div class="cwCell shared">
-          <span class="numberTag">5</span>
-          <input class="cwInput" maxlength="1" data-answer="T">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="A">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="Y">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="L">
-        </div>
-
-        <div class="cwCell">
-          <input class="cwInput" maxlength="1" data-answer="O">
-        </div>
-
-        <div class="cwCell reveal">
-          <input class="cwInput" value="R" readonly>
-        </div>
-
-      </div>
-
-      <!-- ROW 7 -->
-      <div class="cwRow">
-
-        <div class="empty"></div>
-        <div class="empty"></div>
-        <div class="empty"></div>
-
-        <!-- S -->
-        <div class="cwCell reveal">
-          <input class="cwInput" value="S" readonly>
-        </div>
-
-      </div>
-
-      <!-- ROW 8 -->
-      <div class="cwRow">
-
-        <div class="empty"></div>
-        <div class="empty"></div>
-        <div class="empty"></div>
-
-        <!-- I -->
-        <div class="cwCell reveal">
-          <input class="cwInput" value="I" readonly>
-        </div>
-
-      </div>
-
-      <!-- ROW 9 -->
-      <div class="cwRow">
-
-        <div class="empty"></div>
-        <div class="empty"></div>
-        <div class="empty"></div>
-
-        <!-- T -->
-        <div class="cwCell reveal">
-          <input class="cwInput" value="T" readonly>
-        </div>
-
-      </div>
-
+    <!-- I (start of DOWN) -->
+    <div class="cwCell reveal" style="grid-row:1; grid-column:5;">
+      <input class="cwInput" value="I" readonly>
     </div>
+
+    <!-- HIGH -->
+    <div class="cwCell" style="grid-row:2; grid-column:2;">
+      <span class="numberTag">1</span>
+      <input class="cwInput" maxlength="1" data-answer="H">
+    </div>
+
+    <div class="cwCell" style="grid-row:2; grid-column:3;">
+      <input class="cwInput" maxlength="1" data-answer="I">
+    </div>
+
+    <div class="cwCell" style="grid-row:2; grid-column:4;">
+      <input class="cwInput" value="G" readonly>
+    </div>
+
+    <div class="cwCell shared" style="grid-row:2; grid-column:5;">
+      <input class="cwInput" maxlength="1" data-answer="H">
+    </div>
+
+    <!-- SEVEN -->
+    <div class="cwCell" style="grid-row:3; grid-column:4;">
+      <span class="numberTag">2</span>
+      <input class="cwInput" maxlength="1" data-answer="S">
+    </div>
+
+    <div class="cwCell shared" style="grid-row:3; grid-column:5;">
+      <input class="cwInput" maxlength="1" data-answer="E">
+    </div>
+
+    <div class="cwCell" style="grid-row:3; grid-column:6;">
+      <input class="cwInput" maxlength="1" data-answer="V">
+    </div>
+
+    <div class="cwCell" style="grid-row:3; grid-column:7;">
+      <input class="cwInput" value="E" readonly>
+    </div>
+
+    <div class="cwCell" style="grid-row:3; grid-column:8;">
+      <input class="cwInput" maxlength="1" data-answer="N">
+    </div>
+
+    <!-- SINGAPORE -->
+    <div class="cwCell" style="grid-row:4; grid-column:1;">
+      <span class="numberTag">3</span>
+      <input class="cwInput" maxlength="1" data-answer="S">
+    </div>
+
+    <div class="cwCell" style="grid-row:4; grid-column:2;">
+      <input class="cwInput" maxlength="1" data-answer="I">
+    </div>
+
+    <div class="cwCell" style="grid-row:4; grid-column:3;">
+      <input class="cwInput" maxlength="1" data-answer="N">
+    </div>
+
+    <div class="cwCell" style="grid-row:4; grid-column:4;">
+      <input class="cwInput" maxlength="1" data-answer="G">
+    </div>
+
+    <div class="cwCell shared" style="grid-row:4; grid-column:5;">
+      <input class="cwInput" maxlength="1" data-answer="A">
+    </div>
+
+    <div class="cwCell" style="grid-row:4; grid-column:6;">
+      <input class="cwInput" value="P" readonly>
+    </div>
+
+    <div class="cwCell" style="grid-row:4; grid-column:7;">
+      <input class="cwInput" maxlength="1" data-answer="O">
+    </div>
+
+    <div class="cwCell" style="grid-row:4; grid-column:8;">
+      <input class="cwInput" maxlength="1" data-answer="R">
+    </div>
+
+    <div class="cwCell" style="grid-row:4; grid-column:9;">
+      <input class="cwInput" maxlength="1" data-answer="E">
+    </div>
+
+    <!-- STAR -->
+    <div class="cwCell" style="grid-row:5; grid-column:2;">
+      <span class="numberTag">4</span>
+      <input class="cwInput" maxlength="1" data-answer="S">
+    </div>
+
+    <div class="cwCell" style="grid-row:5; grid-column:3;">
+      <input class="cwInput" maxlength="1" data-answer="T">
+    </div>
+
+    <div class="cwCell shared" style="grid-row:5; grid-column:4;">
+      <input class="cwInput" value="A" readonly>
+    </div>
+
+    <div class="cwCell" style="grid-row:5; grid-column:5;">
+      <input class="cwInput" maxlength="1" data-answer="R">
+    </div>
+
+    <!-- TAYLOR -->
+    <div class="cwCell shared" style="grid-row:6; grid-column:5;">
+      <span class="numberTag">5</span>
+      <input class="cwInput" maxlength="1" data-answer="T">
+    </div>
+
+    <div class="cwCell" style="grid-row:6; grid-column:6;">
+      <input class="cwInput" maxlength="1" data-answer="A">
+    </div>
+
+    <div class="cwCell" style="grid-row:6; grid-column:7;">
+      <input class="cwInput" maxlength="1" data-answer="Y">
+    </div>
+
+    <div class="cwCell" style="grid-row:6; grid-column:8;">
+      <input class="cwInput" maxlength="1" data-answer="L">
+    </div>
+
+    <div class="cwCell" style="grid-row:6; grid-column:9;">
+      <input class="cwInput" maxlength="1" data-answer="O">
+    </div>
+
+    <div class="cwCell" style="grid-row:6; grid-column:10;">
+      <input class="cwInput" value="R" readonly>
+    </div>
+
+    <!-- DOWN continuation -->
+    <div class="cwCell reveal" style="grid-row:7; grid-column:5;">
+      <input class="cwInput" value="S" readonly>
+    </div>
+    <div class="cwCell reveal" style="grid-row:8; grid-column:5;">
+      <input class="cwInput" value="I" readonly>
+    </div>
+    <div class="cwCell reveal" style="grid-row:9; grid-column:5;">
+      <input class="cwInput" value="T" readonly>
+    </div>
+
+  </div>
 
     <!-- QUESTIONS -->
     <div class="questionSection">
