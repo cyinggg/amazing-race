@@ -62,6 +62,16 @@
       font-size:16px;
     }
 
+    .mapImage{
+      width:100%;
+      max-width:700px;
+      display:block;
+      margin:20px auto 0 auto;
+      border-radius:14px;
+      border:3px solid #444;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    }
+
     /* Hard clue darker style */
     .hardClue {
       background:#111;
@@ -161,15 +171,27 @@
   <!-- EASY CLUE -->
   <div class="card hardClue">
 
-    <div class="clueTitle">
-      Easy Clue
-    </div>
+      <!-- EASY CLUE -->
+    <div class="card hardClue">
 
-    <div class="clueText">
+      <div class="clueTitle">
+        Easy Clue
+      </div>
 
-      Route direction can be found from the map below.<br><br>
+      <div class="clueText">
 
-      The next check point is located here on the ground level.
+        Route direction can be found from the map below.<br><br>
+
+        The next check point is located here on the ground level.
+
+      </div>
+
+      <!-- MAP IMAGE -->
+      <img 
+        src="/map/map1.png"
+        alt="Checkpoint Map"
+        class="mapImage"
+      >
 
     </div>
 

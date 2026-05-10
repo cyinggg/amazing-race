@@ -78,6 +78,101 @@
       margin-top:20px;
     }
 
+    .crosswordGrid{
+      margin-top:35px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      align-items:flex-start;
+    }
+
+    .cwRow{
+      display:flex;
+      gap:6px;
+      position: relative;
+    }
+
+    .cwCell, .empty{
+      flex: 0 0 55px;
+    }
+
+    .cwCell{
+      width:55px;
+      height:55px;
+      background:#1f1f1f;
+      border:2px solid #555;
+      border-radius:12px;
+      position:relative;
+      overflow:hidden;
+      transition:0.2s;
+    }
+
+    .cwCell:hover{
+      transform:scale(1.03);
+    }
+
+    .cwInput{
+      width:100%;
+      height:100%;
+      border:none;
+      outline:none;
+      background:transparent;
+      text-align:center;
+      color:white;
+      font-size:26px;
+      font-weight:bold;
+      text-transform:uppercase;
+    }
+
+    .cwInput:focus{
+      background:#2a2a2a;
+    }
+
+    .correct{
+      background:#198754 !important;
+      border-color:#4ade80 !important;
+    }
+
+    .wrong{
+      background:#991b1b !important;
+      border-color:#ff6b6b !important;
+    }
+
+    .reveal{
+      background:#ff4d6d;
+      border-color:#ff92a5;
+    }
+
+    .shared{
+      box-shadow:0 0 14px rgba(255,255,255,0.18);
+    }
+
+    .numberTag{
+      position:absolute;
+      top:3px;
+      left:5px;
+      font-size:11px;
+      color:#bbb;
+      font-weight:bold;
+    }
+
+    .empty{
+      width:55px;
+      height:55px;
+      visibility:hidden;
+    }
+
+    .questionSection{
+      margin-top:40px;
+      color:#ddd;
+      line-height:1.9;
+    }
+
+    .questionSection h3{
+      color:#ff4d6d;
+      margin-bottom:10px;
+    }
+
     /* Hint section */
     .hintSection {
       text-align:center;
@@ -215,6 +310,242 @@
 
     </div>
 
+    <!-- CROSSWORD -->
+    <div class="crosswordGrid">
+
+      <!-- ROW 1 -->
+      <div class="cwRow">
+
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+
+        <!-- I -->
+        <div class="cwCell reveal">
+          <input class="cwInput" value="I" readonly>
+        </div>
+
+      </div>
+
+      <!-- ROW 2 : HIGH -->
+      <div class="cwRow">
+
+        <div class="cwCell">
+          <span class="numberTag">1</span>
+          <input class="cwInput" maxlength="1" data-answer="H">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="I">
+        </div>
+
+        <div class="cwCell reveal">
+          <input class="cwInput" value="G" readonly>
+        </div>
+
+        <!-- SHARED H -->
+        <div class="cwCell shared">
+          <input class="cwInput" maxlength="1" data-answer="H">
+        </div>
+
+      </div>
+
+      <!-- ROW 3 : SEVEN -->
+      <div class="cwRow">
+
+        <div class="empty"></div>
+
+        <div class="cwCell">
+          <span class="numberTag">2</span>
+          <input class="cwInput" maxlength="1" data-answer="S">
+        </div>
+
+        <!-- SHARED E -->
+        <div class="cwCell shared">
+          <input class="cwInput" maxlength="1" data-answer="E">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="V">
+        </div>
+
+        <div class="cwCell reveal">
+          <input class="cwInput" value="E" readonly>
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="N">
+        </div>
+
+      </div>
+
+      <!-- ROW 4 : SINGAPORE -->
+      <div class="cwRow">
+
+        <div class="cwCell">
+          <span class="numberTag">3</span>
+          <input class="cwInput" maxlength="1" data-answer="S">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="I">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="N">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="G">
+        </div>
+
+        <!-- SHARED A -->
+        <div class="cwCell shared">
+          <input class="cwInput" maxlength="1" data-answer="A">
+        </div>
+
+        <div class="cwCell reveal">
+          <input class="cwInput" value="P" readonly>
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="O">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="R">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="E">
+        </div>
+
+      </div>
+
+      <!-- ROW 5 : STAR -->
+      <div class="cwRow">
+
+        <div class="empty"></div>
+        <div class="empty"></div>
+
+        <div class="cwCell">
+          <span class="numberTag">4</span>
+          <input class="cwInput" maxlength="1" data-answer="S">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="T">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="A">
+        </div>
+
+        <!-- SHARED R -->
+        <div class="cwCell shared">
+          <input class="cwInput" maxlength="1" data-answer="R">
+        </div>
+
+      </div>
+
+      <!-- ROW 6 : TAYLOR -->
+      <div class="cwRow">
+
+        <div class="empty"></div>
+
+        <!-- SHARED T -->
+        <div class="cwCell shared">
+          <span class="numberTag">5</span>
+          <input class="cwInput" maxlength="1" data-answer="T">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="A">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="Y">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="L">
+        </div>
+
+        <div class="cwCell">
+          <input class="cwInput" maxlength="1" data-answer="O">
+        </div>
+
+        <div class="cwCell reveal">
+          <input class="cwInput" value="R" readonly>
+        </div>
+
+      </div>
+
+      <!-- ROW 7 -->
+      <div class="cwRow">
+
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+
+        <!-- S -->
+        <div class="cwCell reveal">
+          <input class="cwInput" value="S" readonly>
+        </div>
+
+      </div>
+
+      <!-- ROW 8 -->
+      <div class="cwRow">
+
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+
+        <!-- I -->
+        <div class="cwCell reveal">
+          <input class="cwInput" value="I" readonly>
+        </div>
+
+      </div>
+
+      <!-- ROW 9 -->
+      <div class="cwRow">
+
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+
+        <!-- T -->
+        <div class="cwCell reveal">
+          <input class="cwInput" value="T" readonly>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- QUESTIONS -->
+    <div class="questionSection">
+
+      <h3>Across</h3>
+
+      <p><strong>1.</strong> Opposite of low</p>
+
+      <p><strong>2.</strong> Number after six</p>
+
+      <p><strong>3.</strong> Shines bright in the night sky</p>
+
+      <p><strong>4.</strong> Name of the singer who sings "The Fate of Ophelia"</p>
+
+      <br>
+
+      <h3>Down</h3>
+
+      <p><strong>1.</strong> Clue to checkpoint F</p>
+
+    </div>
+
   </div>
 
   <!-- HINT -->
@@ -290,6 +621,55 @@ document.getElementById("hintBtn")
 
   alert("5 points deducted");
 };
+
+</script>
+
+<script>
+
+const inputs =
+document.querySelectorAll(
+  ".cwInput[data-answer]"
+);
+
+inputs.forEach(input => {
+
+  input.addEventListener("input", () => {
+
+    const answer =
+      input.dataset.answer.toUpperCase();
+
+    const value =
+      input.value.toUpperCase();
+
+    input.value = value;
+
+    const parent =
+      input.parentElement;
+
+    parent.classList.remove(
+      "correct",
+      "wrong"
+    );
+
+    if(value.length === 0){
+      return;
+    }
+
+    if(value === answer){
+
+      parent.classList.add("correct");
+
+      input.readOnly = true;
+
+    }else{
+
+      parent.classList.add("wrong");
+
+    }
+
+  });
+
+});
 
 </script>
 
